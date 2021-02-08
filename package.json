@@ -1,0 +1,11 @@
+{
+  "private": true,
+  "scripts": {},
+  "workspaces": {
+    "packages": [
+      "packages/**/*"
+    ]
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}
