@@ -2,7 +2,16 @@
   "name": "@app/graphql",
   "version": "0.0.0",
   "private": true,
-  "scripts": {},
-  "dependencies": {},
+  "scripts": {
+    "start": "./run.dev.sh"
+  },
+  "dependencies": {
+    "@graphile-contrib/pg-simplify-inflector": "^6.1.0",
+    "graphile-build": "^4.11.0",
+    "graphile-build-pg": "^4.11.2",
+    "graphql": "^14.0.0",
+    "pg": "^8.5.1",
+    "postgraphile": "^4.11.0"
+  },
   "devDependencies": {}
 }

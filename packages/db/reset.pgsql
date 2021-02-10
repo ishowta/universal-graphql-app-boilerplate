@@ -1,0 +1,8 @@
+SET client_min_messages TO WARNING;
+
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
+
+DROP DATABASE IF EXISTS test1;
+
+CREATE DATABASE test1 ENCODING 'utf8';
+

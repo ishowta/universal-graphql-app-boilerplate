@@ -19,15 +19,14 @@ GraphQL driven production ready web service boilerplate used PostGraphile, Relay
 
 ## Architecture
 
-- Repository Manager: yarn
+- Repository Manager: lerna
 - Backend
     - RDB: PostgreSQL
     - Graphql Server: PostGraphile
-    - Auth System: Next Auth
+    - Auth Service: Firebase
     - Migration Tool: migra
 - Frontend
-    - Web Framework: Next.js
-    - Native Framework: React native
+    - Client Framework: Expo
     - GraphQL Client: Relay
     - UI Components: React native for Web
     - CSS Framework: tailwind-rn

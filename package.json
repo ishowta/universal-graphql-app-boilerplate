@@ -1,11 +1,14 @@
 {
+  "version": "0.0.0",
   "private": true,
-  "scripts": {},
-  "workspaces": {
-    "packages": [
-      "packages/**/*"
-    ]
+  "scripts": {
+    "install": "yarn lerna bootstrap",
+    "setup": "yarn lerna run setup --stream",
+    "start": "yarn lerna run start --parallel",
+    "reset": "yarn lerna run reset --stream"
   },
-  "dependencies": {},
-  "devDependencies": {}
+  "devDependencies": {
+    "@octokit/core": "^3.2.5",
+    "lerna": "^3.22.1"
+  }
 }
