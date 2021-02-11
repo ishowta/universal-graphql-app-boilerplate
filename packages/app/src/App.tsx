@@ -17,6 +17,7 @@ import {
   Text,
   StatusBar,
 } from "react-native";
+import { tailwind } from "./tailwind";
 
 //declare const global: { HermesInternal: null | {} };
 
@@ -27,9 +28,9 @@ const App: React.FC = () => {
       <SafeAreaView>
         <ScrollView
           contentInsetAdjustmentBehavior="automatic"
-          style={styles.scrollView}
+          style={tailwind("bg-green-600")}
         >
-          <View style={styles.body}>
+          <View>
             <View style={styles.sectionContainer}>
               <Text style={styles.sectionTitle}>Step One</Text>
               <Text style={styles.sectionDescription}>

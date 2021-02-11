@@ -1,0 +1,12 @@
+{
+  "editor.quickSuggestions": {
+    "other": true,
+    "comments": true,
+    "strings": true
+  },
+  "css.validate": false,
+  "tailwindCSS.experimental.classRegex": [
+    "tailwind\\(\"([^\"]*)",
+    "tailwind\\(\\'([^\\']*)"
+  ]
+}

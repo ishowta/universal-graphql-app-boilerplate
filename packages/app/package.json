@@ -2,10 +2,19 @@
   "name": "@app/app",
   "version": "0.0.0",
   "private": true,
-  "scripts": {},
+  "scripts": {
+    "setup": "npx create-tailwind-rn"
+  },
   "dependencies": {
+    "@babel/core": "^7.12.13",
+    "autoprefixer": "^10.0.2",
+    "postcss": "^8.1.13",
     "react": "16.13.1",
     "react-native": "0.63.4",
+    "tailwind-rn": "^3.0.0",
+    "tailwindcss": "^2.0.3"
+  },
+  "devDependencies": {
     "@types/react": "^16.14.3",
     "@types/react-native": "0.63.4"
   }
