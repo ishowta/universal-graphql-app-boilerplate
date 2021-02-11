@@ -1,29 +1,33 @@
 {
   "folders": [
-	{
-		"name": "🚀 @app/app",
-		"path": "packages/app"
-	},
-	{
-		"name": "📦 @app/mobile",
-		"path": "packages/clients/mobile"
-	},
-	{
-		"name": "📦 @app/web",
-		"path": "packages/clients/web"
-	},
-	{
-		"name": "📦 @app/db",
-		"path": "packages/db"
-	},
-	{
-		"name": "📦 @app/e2e",
-		"path": "packages/e2e"
-	},
-	{
-		"name": "📦 @app/graphql",
-		"path": "packages/graphql"
-	}
-],
+    {
+      "name": "🎻 root",
+      "path": ".."
+    },
+    {
+      "name": "🚀 @app/app",
+      "path": "../packages/app"
+    },
+    {
+      "name": "📱 @app/mobile",
+      "path": "../packages/clients/mobile"
+    },
+    {
+      "name": "🖥 @app/web",
+      "path": "../packages/clients/web"
+    },
+    {
+      "name": "💾 @app/db",
+      "path": "../packages/db"
+    },
+    {
+      "name": "🩺 @app/e2e",
+      "path": "../packages/e2e"
+    },
+    {
+      "name": "🔗 @app/graphql",
+      "path": "../packages/graphql"
+    }
+  ],
   "settings": {}
 }

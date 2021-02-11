@@ -19,4 +19,5 @@ postgraphile \
   --enable-query-batching \
   --legacy-relations omit \
   --connection $DATABASE_URL \
-  --schema public
+  --schema public \
+  --cors
