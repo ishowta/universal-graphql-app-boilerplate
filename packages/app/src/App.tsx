@@ -6,6 +6,8 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Test, { TestProps } from "./screens/Test";
 import { Platform, View } from "react-native";
 import { useMediaQuery } from "beautiful-react-hooks";
+import { RelayEnvironmentProvider } from "relay-hooks";
+import environment from "./relay";
 
 export type RootTabList = {
   Users: UserProps;
@@ -30,20 +32,22 @@ const App: React.FC = () => {
   const tabBarVisible = isMobileNative || isPortraitMobile;
 
   return (
-    <NavigationContainer linking={linking}>
-      <RootTab.Navigator initialRouteName="Users">
-        <RootTab.Screen
-          options={{ tabBarVisible }}
-          name="Users"
-          component={Users}
-        />
-        <RootTab.Screen
-          options={{ tabBarVisible }}
-          name="Test"
-          component={Test}
-        />
-      </RootTab.Navigator>
-    </NavigationContainer>
+    <RelayEnvironmentProvider environment={environment}>
+      <NavigationContainer linking={linking}>
+        <RootTab.Navigator initialRouteName="Users">
+          <RootTab.Screen
+            options={{ tabBarVisible }}
+            name="Users"
+            component={Users}
+          />
+          <RootTab.Screen
+            options={{ tabBarVisible }}
+            name="Test"
+            component={Test}
+          />
+        </RootTab.Navigator>
+      </NavigationContainer>
+    </RelayEnvironmentProvider>
   );
 };
 
