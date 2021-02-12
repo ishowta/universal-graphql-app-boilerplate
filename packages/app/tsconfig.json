@@ -1,7 +1,7 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "jsx": "react-native",
+    "jsx": "react",
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "noEmit": true,
     "target": "es2015",
