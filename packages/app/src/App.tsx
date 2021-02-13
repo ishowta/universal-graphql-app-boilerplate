@@ -8,10 +8,11 @@ import { Platform, View } from "react-native";
 import { useMediaQuery } from "beautiful-react-hooks";
 import { RelayEnvironmentProvider } from "relay-hooks";
 import environment from "./relay";
+import { PropsToParams } from "./utils";
 
 export type RootTabList = {
-  Users: UserProps;
-  Test: TestProps;
+  Users: PropsToParams<UserProps>;
+  Test: PropsToParams<TestProps>;
 };
 
 const RootTab = createBottomTabNavigator<RootTabList>();
@@ -27,9 +28,10 @@ const linking: LinkingOptions = {
 };
 
 const App: React.FC = () => {
-  const isMobileNative = Platform.OS === "ios" || Platform.OS === "android";
-  const isPortraitMobile = useMediaQuery("(max-width: 32rem)");
-  const tabBarVisible = isMobileNative || isPortraitMobile;
+  const tabBarVisible =
+    Platform.OS === "ios" ||
+    Platform.OS === "android" ||
+    (Platform.OS === "web" && useMediaQuery("(max-width: 32rem)"));
 
   return (
     <RelayEnvironmentProvider environment={environment}>

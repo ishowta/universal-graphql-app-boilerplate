@@ -6,12 +6,10 @@ const appDirectory = fs.realpathSync(process.cwd());
 const resolveApp = (relativePath) => path.resolve(appDirectory, relativePath);
 
 // our packages that will now be included in the CRA build step
-const appIncludes = [resolveApp("src"), resolveApp("../../app/src")];
-const projectIncludes = [
+const appIncludes = [
   resolveApp("src"),
-  resolveApp("node_modules"),
   resolveApp("../../app/src"),
-  resolveApp("../../app/node_modules"),
+  resolveApp("../../../node_modules"),
 ];
 
 module.exports = function override(config, env) {
@@ -21,18 +19,13 @@ module.exports = function override(config, env) {
   );
 
   config.module.rules[0].include = appIncludes;
-  config.module.rules[1].oneOf[2].include = projectIncludes;
+  config.module.rules[1].oneOf[2].include = appIncludes;
   config.module.rules[1].oneOf[2].options.plugins.push(
     require.resolve("babel-plugin-react-native-web")
   );
   config.module.rules[1].oneOf[2].options.plugins.push(
     require.resolve("babel-plugin-relay")
   );
-  console.log(config.module.rules[1].oneOf[2].options.presets);
-  config.module.rules[1].oneOf[2].options.presets.push(
-    require.resolve("@babel/preset-react")
-  );
-
   config.plugins.push(
     new webpack.DefinePlugin({ __DEV__: env !== "production" })
   );

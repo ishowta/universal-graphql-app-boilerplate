@@ -1,8 +1,8 @@
 import React from "react";
 import { Text } from "react-native";
 
-export type TestProps = undefined;
+export type TestProps = {};
 
-const Test: React.FC = () => <Text>Hello</Text>;
+const Test: React.FC<TestProps> = () => <Text>Hello</Text>;
 
 export default Test;

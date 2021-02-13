@@ -10,7 +10,7 @@ import environment from "../relay";
 import { tailwind } from "../tailwind";
 import { UsersQuery } from "./__generated__/UsersQuery.graphql";
 
-export type UserProps = undefined;
+export type UserProps = {};
 
 const Users: React.FC<UserProps> = () => {
   const navigation = useNavigation<
@@ -39,43 +39,6 @@ const Users: React.FC<UserProps> = () => {
         </>
       )}
     </View>
-  );
-};
-
-const Users2: React.FC = () => {
-  const navigation = useNavigation<
-    BottomTabNavigationProp<RootTabList, "Users">
-  >();
-
-  return (
-    <QueryRenderer<UsersQuery>
-      environment={environment}
-      query={graphql`
-        query UsersQuery {
-          users {
-            nodes {
-              id
-              nodeId
-            }
-          }
-        }
-      `}
-      variables={{}}
-      render={({ error, props }) => {
-        if (error) {
-          return <Text>{error.message}</Text>;
-        }
-        if (!props) {
-          return <Text>Loading...</Text>;
-        }
-        return (
-          <View style={tailwind("flex-1 items-center justify-center")}>
-            <Text>User ID: {props.users?.nodes[0].id}</Text>
-            <Button title="Test" onPress={() => navigation.navigate("Test")} />
-          </View>
-        );
-      }}
-    />
   );
 };
 

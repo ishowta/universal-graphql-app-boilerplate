@@ -1,10 +1,10 @@
 import reportWebVitals from "./reportWebVitals";
 import { AppRegistry } from "react-native";
 import App from "@app/app/src/App";
-import "./index.css";
+import { name as appName } from "../../../../app.json";
 
-AppRegistry.registerComponent("myprojectname", () => App);
-AppRegistry.runApplication("myprojectname", {
+AppRegistry.registerComponent(appName, () => App);
+AppRegistry.runApplication(appName, {
   rootTag: document.getElementById("root"),
 });
 

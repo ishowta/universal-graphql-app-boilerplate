@@ -5,7 +5,5 @@
   "scripts": {
     "setup": ". ../../scripts/loadenv.sh && psql -U $DB_ROOT_USER -d postgres -f ./reset.pgsql && psql -U $DB_ROOT_USER -d $DATABASE_NAME -f ./schema.pgsql && psql -U $DB_ROOT_USER -d $DATABASE_NAME -f ./constraints/*.pgsql && psql -U $DB_ROOT_USER -d $DATABASE_NAME -f ./seeds.pgsql",
     "reset": "yarn setup"
-  },
-  "dependencies": {},
-  "devDependencies": {}
+  }
 }

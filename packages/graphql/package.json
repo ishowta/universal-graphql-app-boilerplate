@@ -12,6 +12,5 @@
     "graphql": "^14.0.0",
     "pg": "^8.5.1",
     "postgraphile": "^4.11.0"
-  },
-  "devDependencies": {}
+  }
 }
