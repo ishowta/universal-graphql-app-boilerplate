@@ -24,11 +24,21 @@ module.exports = function override(config, env) {
     require.resolve("babel-plugin-react-native-web")
   );
   config.module.rules[1].oneOf[2].options.plugins.push(
+    require.resolve("@babel/plugin-proposal-class-properties")
+  );
+  config.module.rules[1].oneOf[2].options.plugins.push(
     require.resolve("babel-plugin-relay")
   );
   config.plugins.push(
     new webpack.DefinePlugin({ __DEV__: env !== "production" })
   );
+
+  // Load react-native-vector-icons
+  config.module.rules.push({
+    test: /\.ttf$/,
+    loader: 'file-loader',
+    include: path.resolve(__dirname, './static/media/[name].[ext]'),
+  });
 
   return config;
 };
