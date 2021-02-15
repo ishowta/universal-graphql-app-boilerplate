@@ -3,34 +3,36 @@ import React, { useEffect, useMemo, useState } from "react";
 import { Button, Text, View, _Text } from "react-native";
 import { graphql } from "react-relay";
 import { useQuery } from "relay-hooks";
-import { tailwind } from "../tailwind";
+import { tailwind } from "../../tailwind";
 import { UsersScreenQuery } from "./__generated__/UsersScreenQuery.graphql";
-import { useAuthState } from "../hooks/useAuthState";
-import { RootTabList } from "../App";
+import { useAuthState } from "../../hooks/firebase/useAuthState";
+import { RootTabList } from "../../App";
 
-export type UserScreenParams = {};
+import firebase from "firebase/app";
+import "firebase/auth";
+
+export type UserScreenParams = undefined;
 export type UserScreenProps = BottomTabScreenProps<RootTabList, "UsersScreen">;
 
 export const UsersScreen = ({ navigation }: UserScreenProps) => {
+  const [user, isAuthLoading, authError] = useAuthState();
   const {
     data,
     isLoading: isDbLoading,
     error: dbError,
-  } = useQuery<UsersScreenQuery>(graphql`
-    query UsersScreenQuery {
-      users {
-        nodes {
+  } = useQuery<UsersScreenQuery>(
+    graphql`
+      query UsersScreenQuery($id: String!) {
+        user(id: $id) {
           id
-          nodeId
+          username
+          createdAt
         }
       }
-    }
-  `);
-  const [user, isAuthLoading, authError] = useAuthState();
-  const [token, setToken] = useState<string | null>(null);
-  useEffect(() => {
-    user?.getIdToken().then(setToken);
-  }, [user]);
+    `,
+    { id: user?.uid ?? "" },
+    { skip: user == null }
+  );
   return (
     <View style={tailwind("flex-1 items-center justify-center")}>
       {dbError != null ? (
@@ -41,7 +43,7 @@ export const UsersScreen = ({ navigation }: UserScreenProps) => {
         <Text>Loading...</Text>
       ) : (
         <>
-          <Text>DB First User ID: {data!.users?.nodes[0].id}</Text>
+          <Text>DB User Name: {data?.user?.username}</Text>
           {user == null ? (
             <Text>Not login</Text>
           ) : (
@@ -49,7 +51,6 @@ export const UsersScreen = ({ navigation }: UserScreenProps) => {
               <Text>Auth User ID: {user.uid}</Text>
               <Text>Auth User Email: {user.email}</Text>
               <Text>Auth User Name: {user.displayName}</Text>
-              <Text>Auth User Token: {token}</Text>
             </>
           )}
           <Button

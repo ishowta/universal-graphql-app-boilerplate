@@ -1,3 +1,6 @@
+# Private folder
+private/
+
 # Yarn
 .yarn/*
 !.yarn/cache
@@ -77,8 +80,7 @@ typings/
 .yarn-integrity
 
 # dotenv environment variables file
-.env
-.env.test
+.env.local
 
 # parcel-bundler cache (https://parceljs.org/)
 .cache
