@@ -15,13 +15,9 @@ import cors from "fastify-cors";
 
   await fastify.register(cors, {
     origin: (origin, cb) => {
-      console.warn(origin, process.env.GRAPHQL_SERVER_ORIGIN);
       if (
-        [
-          process.env.APP_URL,
-          process.env.GRAPHQL_SERVER_ORIGIN,
-          undefined,
-        ].includes(origin)
+        ["development", "test"].includes(process.env.NODE_ENV!) ||
+        origin === process.env.APP_URL
       ) {
         cb(null, true);
         return;

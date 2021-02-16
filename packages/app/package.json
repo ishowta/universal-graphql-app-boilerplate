@@ -10,6 +10,7 @@
     "@app/utils": "~0.0.0",
     "@babel/core": "^7.12.13",
     "@lukaselmer/react-firebase-hooks": "^2.2.1",
+    "@react-native-community/async-storage": "^1.12.1",
     "@react-native-community/google-signin": "^5.0.0",
     "@react-native-firebase/app": "^10.8.0",
     "@react-native-firebase/auth": "^10.8.0",
@@ -32,6 +33,7 @@
   "devDependencies": {
     "@types/react": "^16.14.3",
     "@types/react-native": "0.63.4",
+    "@types/react-native-vector-icons": "^6.4.6",
     "@types/react-relay": "^7.0.17",
     "@types/relay-runtime": "^10.1.8",
     "graphql": "^15.0.0",

@@ -1,3 +1,10 @@
+#! As boilerplate
+/ios/mobile.xcodeproj/project.pbxproj
+
+
+# Firebase
+GoogleService-Info.plist
+
 # OSX
 #
 .DS_Store

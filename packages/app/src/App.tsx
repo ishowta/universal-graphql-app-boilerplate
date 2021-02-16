@@ -5,10 +5,9 @@ import { LinkingOptions, NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { HomeScreen, HomeScreenParams } from "./screens/RootTab/HomeScreen";
 import { Platform, View } from "react-native";
-import { useMediaQuery } from "beautiful-react-hooks";
 import { AuthScreen, AuthScreenParams } from "./screens/RootTab/AuthScreen";
 import { FirebaseProvider } from "./providers/firebaseProvider";
-import "./icons";
+import "./helpers/loadIcons";
 import { RelayProvider } from "./providers/relayProvider";
 import { graphql, useMutation, useRelayEnvironment } from "relay-hooks";
 import { useEffect } from "react";
@@ -37,10 +36,14 @@ const App: React.FC = () => {
   const tabBarVisible =
     Platform.OS === "ios" ||
     Platform.OS === "android" ||
-    (Platform.OS === "web" && useMediaQuery("(max-width: 32rem)"));
+    (Platform.OS === "web" &&
+      (() => {
+        const { useMediaQuery } = require("beautiful-react-hooks");
+        return useMediaQuery("(max-width: 32rem)");
+      })());
 
   const environment = useRelayEnvironment();
-  const [createUser] = useMutation<AppCreateUserMutation>(
+  const [tryCreateUser] = useMutation<AppCreateUserMutation>(
     graphql`
       mutation AppCreateUserMutation($input: CreateUserInput!) {
         createUser(input: $input) {
@@ -52,7 +55,7 @@ const App: React.FC = () => {
     `
   );
   useEffect(() => {
-    createUser({ variables: { input: { user: {} } } });
+    tryCreateUser({ variables: { input: { user: {} } } }).catch((e) => {});
   }, [environment]);
 
   return (

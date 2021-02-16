@@ -1,6 +1,6 @@
 import React from "react";
 import { FlatList, ListRenderItem } from "react-native";
-import { SocialIcon } from "react-native-elements";
+import { SocialIcon, Text } from "react-native-elements";
 import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
 import { RootTabList } from "../../App";
 import { useCallback } from "react";
@@ -38,10 +38,12 @@ export const AuthScreen = ({ navigation }: AuthScreenProps) => {
     []
   );
   return (
-    <FlatList<AuthProviderTag>
-      data={AuthProviderTagList}
-      renderItem={AuthItem}
-      keyExtractor={(tag) => tag}
-    />
+    <>
+      <FlatList<AuthProviderTag>
+        data={AuthProviderTagList}
+        renderItem={AuthItem}
+        keyExtractor={(tag) => tag}
+      />
+    </>
   );
 };

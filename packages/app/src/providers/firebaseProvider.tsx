@@ -15,10 +15,7 @@ const config: Parameters<typeof firebase.initializeApp>[0] = {
 
 const FirebaseContext = createContext<firebase.app.App | null>(null);
 
-export const useFirebaseApp = () => {
-  const app = useContext(FirebaseContext);
-  return app;
-};
+export const useFirebaseApp = () => useContext(FirebaseContext);
 
 export const FirebaseProvider: React.FC = ({ children }) => {
   const app = useMemo(() => firebase.initializeApp(config), [config]);

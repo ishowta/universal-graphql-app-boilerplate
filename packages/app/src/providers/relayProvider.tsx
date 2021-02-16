@@ -8,22 +8,14 @@ import {
   Store,
 } from "relay-runtime";
 import { useToken } from "../hooks/firebase/useToken";
-import { Platform } from "react-native";
-
-let GRAPHQL_SERVER_URL = "";
-if (Platform.OS === "web") {
-  GRAPHQL_SERVER_URL = process.env.REACT_APP_GRAPHQL_SERVER_URL!;
-} else {
-  const env = require("react-native-dotenv");
-  GRAPHQL_SERVER_URL = env.REACT_APP_GRAPHQL_SERVER_URL;
-}
+import { env } from "../helpers/env";
 
 export const RelayProvider: React.FC = ({ children }) => {
   const [token] = useToken();
 
   const fetchQuery = useCallback<FetchFunction>(
     (operation, variables) => {
-      return fetch(GRAPHQL_SERVER_URL, {
+      return fetch(env.REACT_APP_GRAPHQL_SERVER_URL!, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

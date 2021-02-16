@@ -1,5 +1,5 @@
 import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
-import React, { useEffect, useMemo, useState } from "react";
+import React from "react";
 import { Button, Text, View, _Text } from "react-native";
 import { graphql } from "react-relay";
 import { useQuery } from "relay-hooks";
@@ -39,8 +39,6 @@ export const UsersScreen = ({ navigation }: UserScreenProps) => {
         <Text>{dbError.message}</Text>
       ) : authError != null ? (
         <Text>{authError.message}</Text>
-      ) : isDbLoading || isAuthLoading ? (
-        <Text>Loading...</Text>
       ) : (
         <>
           <Text>DB User Name: {data?.user?.username}</Text>

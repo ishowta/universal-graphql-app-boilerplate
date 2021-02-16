@@ -1,4 +1,9 @@
 PODS:
+  - AppAuth (1.4.0):
+    - AppAuth/Core (= 1.4.0)
+    - AppAuth/ExternalUserAgent (= 1.4.0)
+  - AppAuth/Core (1.4.0)
+  - AppAuth/ExternalUserAgent (1.4.0)
   - boost-for-react-native (1.63.0)
   - CocoaAsyncSocket (7.6.5)
   - DoubleConversion (1.1.6)
@@ -87,6 +92,10 @@ PODS:
   - glog (0.3.5)
   - GoogleDataTransport (8.2.0):
     - nanopb (~> 2.30907.0)
+  - GoogleSignIn (5.0.2):
+    - AppAuth (~> 1.2)
+    - GTMAppAuth (~> 1.0)
+    - GTMSessionFetcher/Core (~> 1.1)
   - GoogleUtilities/AppDelegateSwizzler (7.2.2):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
@@ -102,7 +111,14 @@ PODS:
   - "GoogleUtilities/NSData+zlib (7.2.2)"
   - GoogleUtilities/Reachability (7.2.2):
     - GoogleUtilities/Logger
+  - GTMAppAuth (1.1.0):
+    - AppAuth/Core (~> 1.4)
+    - GTMSessionFetcher (~> 1.4)
+  - GTMSessionFetcher (1.5.0):
+    - GTMSessionFetcher/Full (= 1.5.0)
   - GTMSessionFetcher/Core (1.5.0)
+  - GTMSessionFetcher/Full (1.5.0):
+    - GTMSessionFetcher/Core (= 1.5.0)
   - libevent (2.1.12)
   - nanopb (2.30907.0):
     - nanopb/decode (= 2.30907.0)
@@ -339,6 +355,8 @@ PODS:
     - React-Core (= 0.63.4)
     - React-cxxreact (= 0.63.4)
     - React-jsi (= 0.63.4)
+  - RNCAsyncStorage (1.12.1):
+    - React-Core
   - RNCMaskedView (0.1.10):
     - React
   - RNFBApp (10.8.0):
@@ -350,9 +368,14 @@ PODS:
     - RNFBApp
   - RNGestureHandler (1.10.1):
     - React-Core
+  - RNGoogleSignin (5.0.0):
+    - GoogleSignIn (~> 5.0.0)
+    - React-Core
   - RNReanimated (1.13.2):
     - React-Core
   - RNScreens (2.17.1):
+    - React-Core
+  - RNVectorIcons (8.0.0):
     - React-Core
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
@@ -406,16 +429,20 @@ DEPENDENCIES:
   - React-RCTText (from `../../../../node_modules/react-native/Libraries/Text`)
   - React-RCTVibration (from `../../../../node_modules/react-native/Libraries/Vibration`)
   - ReactCommon/turbomodule/core (from `../../../../node_modules/react-native/ReactCommon`)
+  - "RNCAsyncStorage (from `../../../../node_modules/@react-native-community/async-storage`)"
   - "RNCMaskedView (from `../../../../node_modules/@react-native-community/masked-view`)"
   - "RNFBApp (from `../../../../node_modules/@react-native-firebase/app`)"
   - "RNFBAuth (from `../../../../node_modules/@react-native-firebase/auth`)"
   - RNGestureHandler (from `../../../../node_modules/react-native-gesture-handler`)
+  - "RNGoogleSignin (from `../../../../node_modules/@react-native-community/google-signin`)"
   - RNReanimated (from `../../../../node_modules/react-native-reanimated`)
   - RNScreens (from `../../../../node_modules/react-native-screens`)
+  - RNVectorIcons (from `../../../../node_modules/react-native-vector-icons`)
   - Yoga (from `../../../../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
   trunk:
+    - AppAuth
     - boost-for-react-native
     - CocoaAsyncSocket
     - Firebase
@@ -430,7 +457,9 @@ SPEC REPOS:
     - Flipper-RSocket
     - FlipperKit
     - GoogleDataTransport
+    - GoogleSignIn
     - GoogleUtilities
+    - GTMAppAuth
     - GTMSessionFetcher
     - libevent
     - nanopb
@@ -491,6 +520,8 @@ EXTERNAL SOURCES:
     :path: "../../../../node_modules/react-native/Libraries/Vibration"
   ReactCommon:
     :path: "../../../../node_modules/react-native/ReactCommon"
+  RNCAsyncStorage:
+    :path: "../../../../node_modules/@react-native-community/async-storage"
   RNCMaskedView:
     :path: "../../../../node_modules/@react-native-community/masked-view"
   RNFBApp:
@@ -499,14 +530,19 @@ EXTERNAL SOURCES:
     :path: "../../../../node_modules/@react-native-firebase/auth"
   RNGestureHandler:
     :path: "../../../../node_modules/react-native-gesture-handler"
+  RNGoogleSignin:
+    :path: "../../../../node_modules/@react-native-community/google-signin"
   RNReanimated:
     :path: "../../../../node_modules/react-native-reanimated"
   RNScreens:
     :path: "../../../../node_modules/react-native-screens"
+  RNVectorIcons:
+    :path: "../../../../node_modules/react-native-vector-icons"
   Yoga:
     :path: "../../../../node_modules/react-native/ReactCommon/yoga"
 
 SPEC CHECKSUMS:
+  AppAuth: 31bcec809a638d7bd2f86ea8a52bd45f6e81e7c7
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
   DoubleConversion: cde416483dac037923206447da6e1454df403714
@@ -526,7 +562,9 @@ SPEC CHECKSUMS:
   Folly: b73c3869541e86821df3c387eb0af5f65addfab4
   glog: 40a13f7840415b9a77023fbcae0f1e6f43192af3
   GoogleDataTransport: 1024b1a4dfbd7a0e92cb20d7e0a6f1fb66b449a4
+  GoogleSignIn: 7137d297ddc022a7e0aa4619c86d72c909fa7213
   GoogleUtilities: 31c5b01f978a70c6cff2afc6272b3f1921614b43
+  GTMAppAuth: 197a8dabfea5d665224aa00d17f164fc2248dab9
   GTMSessionFetcher: b3503b20a988c4e20cc189aa798fd18220133f52
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
   nanopb: 59221d7f958fb711001e6a449489542d92ae113e
@@ -553,12 +591,15 @@ SPEC CHECKSUMS:
   React-RCTText: 5c51df3f08cb9dedc6e790161195d12bac06101c
   React-RCTVibration: ae4f914cfe8de7d4de95ae1ea6cc8f6315d73d9d
   ReactCommon: 73d79c7039f473b76db6ff7c6b159c478acbbb3b
+  RNCAsyncStorage: b03032fdbdb725bea0bd9e5ec5a7272865ae7398
   RNCMaskedView: 5a8ec07677aa885546a0d98da336457e2bea557f
   RNFBApp: 97b618641633d6d23187a9d0537c3893482c483f
   RNFBAuth: 7c6c9e7289d98709cd5d1333d829925f81823375
   RNGestureHandler: 5e58135436aacc1c5d29b75547d3d2b9430d052c
+  RNGoogleSignin: ad866d4c4af2651e36801dd3b7771d7715353499
   RNReanimated: e03f7425cb7a38dcf1b644d680d1bfc91c3337ad
   RNScreens: b6c9607e6fe47c1b6e2f1910d2acd46dd7ecea3a
+  RNVectorIcons: f67a1abce2ec73e62fe4606e8110e95a832bc859
   Yoga: 4bd86afe9883422a7c4028c00e34790f560923d6
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 

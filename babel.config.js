@@ -7,12 +7,12 @@ module.exports = {
     [
       "module:react-native-dotenv",
       {
-        moduleName: "react-native-dotenv",
-        path: "./.env"
+        moduleName: "@env",
+        path: ".env",
         blacklist: null,
-        whitelist: null
+        whitelist: null,
         safe: true,
-        allowUndefined: false
+        allowUndefined: false,
       },
     ],
   ],
