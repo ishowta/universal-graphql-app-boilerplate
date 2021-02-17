@@ -40,4 +40,5 @@ GraphQL driven universal application boilerplate used React, React Native, Postg
 - Add migration tool(migra?)
 - Add Tests(Jest, Cypass, Storybook, CI ...)
 - Add payment system(Stripe?)
+- Styling
 - Refactoring
