@@ -36,6 +36,7 @@ GraphQL driven universal application boilerplate used React, React Native, Postg
 1. As needed: `yarn install`, `yarn setup`, `yarn start`
 
 ## Todo
+- Setup android build
 - Setup production build and deploy
 - Add migration tool(migra?)
 - Add Tests(Jest, Cypass, Storybook, CI ...)
