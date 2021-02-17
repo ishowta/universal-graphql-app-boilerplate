@@ -8,10 +8,11 @@
     "nohoist": []
   },
   "scripts": {
+    "install": "yarn wsrun --exclude-missing --serial install",
     "setup": "yarn wsrun --exclude-missing --stages setup",
     "start": "yarn wsrun --exclude-missing start",
     "reset": "yarn wsrun --exclude-missing --stages reset",
-    "postinstall": "patch-package",
+    "postinstall": "patch-package && yarn wsrun --exclude-missing --serial postinstall",
     "format": "prettier --write . ; eslint . --ext ts --ext tsx --ext js --fix",
     "test": "tsc --pretty ; eslint . --ext ts --ext tsx --ext js",
     "test:watch": "yarn wsrun --exclude-missing test:watch"
