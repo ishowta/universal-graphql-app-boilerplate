@@ -1,0 +1,28 @@
+{
+  // See https://go.microsoft.com/fwlink/?LinkId=827846
+  // for the documentation about the extensions.json format
+  "recommendations": [
+    "nucllear.vscode-extension-auto-import",
+    "formulahendry.auto-rename-tag",
+    "aaron-bond.better-comments",
+    "msjsdiag.debugger-for-chrome",
+    "mikestead.dotenv",
+    "dbaeumer.vscode-eslint",
+    "graphql.vscode-graphql",
+    "folke.vscode-monorepo-workspace",
+    "christian-kohler.npm-intellisense",
+    "ionutvmi.path-autocomplete",
+    "bradymholt.pgformatter",
+    "jptarquino.postgresql",
+    "cweijan.vscode-postgresql-client2",
+    "ckolkman.vscode-postgres",
+    "esbenp.prettier-vscode",
+    "msjsdiag.vscode-react-native",
+    "orta.vscode-react-native-storybooks",
+    "mtxr.sqltools",
+    "gruntfuggly.todo-tree",
+    "tamj0rd2.ts-quickfixes-extension",
+    "q.typescript-mono-repo-import-helper",
+    "gamunu.vscode-yarn"
+  ]
+}
