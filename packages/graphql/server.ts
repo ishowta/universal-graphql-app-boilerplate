@@ -1,11 +1,12 @@
 import createFastify from "fastify";
 import middie from "middie";
 import cors from "fastify-cors";
-import { postgraphile } from "./postgraphile";
 
 require("dotenv-flow").config({
   path: "../../",
 });
+// eslint-disable-next-line import/first
+import { postgraphile } from "./postgraphile";
 
 (async () => {
   const fastify = createFastify({
