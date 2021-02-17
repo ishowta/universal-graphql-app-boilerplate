@@ -4,8 +4,6 @@ GraphQL driven universal application boilerplate used React, React Native, Postg
 
 :warning: **This app will probably work, but it's still experimental and can't be used in production.**
 
-![Architecture](./architecture.png)
-
 ## Concept
 
 1. GraphQL Driven
@@ -18,7 +16,8 @@ GraphQL driven universal application boilerplate used React, React Native, Postg
 
 ## Architecture
 
-- Repository Manager: yarn(v1)
+![Architecture](./architecture.png)
+
 - Backend
   - RDB: PostgreSQL
   - Graphql Server: PostGraphile
@@ -27,9 +26,6 @@ GraphQL driven universal application boilerplate used React, React Native, Postg
   - Client Framework: React, React Native
   - GraphQL Client: Relay
   - UI Components: React native
-  - CSS Framework: tailwind
-  - Linter: ESLint
-  - Formatter: Prettier
 
 ## Usage
 
