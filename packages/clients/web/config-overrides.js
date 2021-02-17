@@ -1,3 +1,5 @@
+/* eslint-disable no-param-reassign */
+
 const fs = require("fs");
 const path = require("path");
 const webpack = require("webpack");
@@ -36,8 +38,8 @@ module.exports = function override(config, env) {
   // Load react-native-vector-icons
   config.module.rules.push({
     test: /\.ttf$/,
-    loader: 'file-loader',
-    include: path.resolve(__dirname, './static/media/[name].[ext]'),
+    loader: "file-loader",
+    include: path.resolve(__dirname, "./static/media/[name].[ext]"),
   });
 
   return config;

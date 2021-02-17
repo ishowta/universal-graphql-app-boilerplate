@@ -1,15 +1,15 @@
 import { postgraphile as createPostgraphile } from "postgraphile";
-import dotenv from "dotenv-flow";
 import admin from "firebase-admin";
 import { FastifyInstance } from "fastify";
 import { record } from "@app/utils/src/common";
 
 const IS_PROD = process.env.NODE_ENV === "production";
 const IS_DEV = process.env.NODE_ENV === "development";
-const IS_TEST = process.env.NODE_ENV === "test";
+const _IS_TEST = process.env.NODE_ENV === "test";
 
 admin.initializeApp({
   credential: admin.credential.cert(
+    // eslint-disable-next-line import/no-dynamic-require
     require(process.env.FIREBASE_CREDENTIALS_PATH!)
   ),
 });
@@ -35,7 +35,7 @@ export const postgraphile = (fastify: FastifyInstance) =>
     enableCors: true,
     pgSettings: async (req) => {
       const generateJWTClaims = async () => {
-        //? https://www.graphile.org/postgraphile/postgresql-schema-design/#json-web-tokens
+        // ? https://www.graphile.org/postgraphile/postgresql-schema-design/#json-web-tokens
         const rawToken = req.headers.authorization?.split("Bearer ")[1];
         if (rawToken == null) {
           fastify.log.warn(
@@ -48,7 +48,7 @@ export const postgraphile = (fastify: FastifyInstance) =>
           // TODO: Expand nested claims
           const prefixedToken = record(
             Object.entries(token)
-              .filter(([key, value]) => typeof value === "string")
+              .filter(([_, value]) => typeof value === "string")
               .map(([key, value]) => [`jwt.claims.${key}`, value])
           );
           prefixedToken["jwt.claims.role"] = "authenticated_user";

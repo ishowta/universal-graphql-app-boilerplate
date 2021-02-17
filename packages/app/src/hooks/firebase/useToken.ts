@@ -1,11 +1,9 @@
 import firebase from "firebase/app";
 import "firebase/auth";
 import { useEffect, useState } from "react";
-import { useFirebaseApp } from "../../providers/firebaseProvider";
 import { useAuthState } from "./useAuthState";
 
 export const useToken = () => {
-  const app = useFirebaseApp();
   const [authState, _, authStateError] = useAuthState();
   const [
     getTokenError,

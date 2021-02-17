@@ -1,0 +1,84 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "plugins": [],
+  "extends": [
+    "plugin:jest/recommended",
+    "airbnb-typescript",
+    "prettier",
+    "prettier/react",
+    "prettier/@typescript-eslint"
+  ],
+  "env": {
+    "es6": true,
+    "jest": true,
+    "browser": true
+  },
+  "rules": {
+    // Ignore ^_ for develop
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "varsIgnorePattern": "^_",
+        "argsIgnorePattern": "^_"
+      }
+    ],
+    "no-underscore-dangle": "off",
+    // Not prefer
+    "import/prefer-default-export": "off",
+    // Require global require for code sharing
+    "global-require": "off",
+    // Bug in monorepo (https://github.com/benmosher/eslint-plugin-import/pull/1696)
+    "import/no-extraneous-dependencies": "off",
+    // No problem
+    "import/no-cycle": "off",
+    // Typescript
+    "react/prop-types": "off",
+    "consistent-return": "off",
+    // Need for jsx
+    "no-nested-ternary": "off",
+    // Typescript has exhausive check
+    "default-case": "off",
+    // Official default and allow UUID
+    "@typescript-eslint/naming-convention": [
+      "error",
+      {
+        "selector": "objectLiteralProperty",
+        "format": [],
+        "filter": { "regex": "^__DEV__$", "match": true },
+        "custom": { "regex": "^__DEV__$", "match": true }
+      },
+      {
+        "selector": "default",
+        "format": ["camelCase"],
+        "leadingUnderscore": "allow",
+        "trailingUnderscore": "allow"
+      },
+      {
+        "selector": "objectLiteralProperty",
+        "format": ["camelCase", "PascalCase", "UPPER_CASE"],
+        "leadingUnderscore": "allow",
+        "trailingUnderscore": "allow"
+      },
+      {
+        "selector": "typeProperty",
+        "format": ["camelCase", "PascalCase", "UPPER_CASE"],
+        "leadingUnderscore": "allow",
+        "trailingUnderscore": "allow"
+      },
+      {
+        "selector": "variable",
+        "format": ["camelCase", "PascalCase", "UPPER_CASE"],
+        "leadingUnderscore": "allow",
+        "trailingUnderscore": "allow"
+      },
+
+      {
+        "selector": "typeLike",
+        "format": ["PascalCase"]
+      }
+    ]
+  }
+}

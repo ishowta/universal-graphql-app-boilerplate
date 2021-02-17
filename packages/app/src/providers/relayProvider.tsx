@@ -14,8 +14,8 @@ export const RelayProvider: React.FC = ({ children }) => {
   const [token] = useToken();
 
   const fetchQuery = useCallback<FetchFunction>(
-    (operation, variables) => {
-      return fetch(env.REACT_APP_GRAPHQL_SERVER_URL!, {
+    (operation, variables) =>
+      fetch(env.REACT_APP_GRAPHQL_SERVER_URL!, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -25,10 +25,7 @@ export const RelayProvider: React.FC = ({ children }) => {
           query: operation.text,
           variables,
         }),
-      }).then((response) => {
-        return response.json();
-      });
-    },
+      }).then((response) => response.json()),
     [token]
   );
 

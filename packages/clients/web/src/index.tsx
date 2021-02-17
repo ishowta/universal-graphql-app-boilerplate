@@ -1,6 +1,6 @@
-import reportWebVitals from "./reportWebVitals";
 import { AppRegistry } from "react-native";
 import App from "@app/app/src/App";
+import reportWebVitals from "./reportWebVitals";
 import { name as appName } from "../../../../app.json";
 
 AppRegistry.registerComponent(appName, () => App);

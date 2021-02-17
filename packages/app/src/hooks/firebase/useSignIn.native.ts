@@ -1,8 +1,7 @@
 import { GoogleSignin } from "@react-native-community/google-signin";
 import firebaseAuth from "@react-native-firebase/auth";
-import { ReactNativeFirebase } from "@react-native-firebase/app";
-import { useFirebaseApp } from "../../providers/firebaseProvider.native";
 import { useCallback } from "react";
+import { useFirebaseApp } from "../../providers/firebaseProvider.native";
 
 // TODO: Append several providerTags of auth
 export const AuthProviderTagList = ["Google"] as const;
@@ -21,7 +20,6 @@ export const useSignIn = () => {
             idToken
           );
           await app?.auth().signInWithCredential(googleCredential);
-          return;
         }
       }
     },

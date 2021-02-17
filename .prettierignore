@@ -1,0 +1,7 @@
+node_modules
+Pods
+yarn.lock
+public
+out
+build
+dist

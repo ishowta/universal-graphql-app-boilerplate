@@ -1,17 +1,17 @@
-import React from "react";
-import { UsersScreen, UserScreenParams } from "./screens/RootTab/UsersScreen";
-import "react-native-gesture-handler";
+import React, { useEffect } from "react";
 import { LinkingOptions, NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { Platform } from "react-native";
+import { graphql, useMutation, useRelayEnvironment } from "relay-hooks";
+import { UsersScreen, UserScreenParams } from "./screens/RootTab/UsersScreen";
 import { HomeScreen, HomeScreenParams } from "./screens/RootTab/HomeScreen";
-import { Platform, View } from "react-native";
 import { AuthScreen, AuthScreenParams } from "./screens/RootTab/AuthScreen";
 import { FirebaseProvider } from "./providers/firebaseProvider";
-import "./helpers/loadIcons";
 import { RelayProvider } from "./providers/relayProvider";
-import { graphql, useMutation, useRelayEnvironment } from "relay-hooks";
-import { useEffect } from "react";
 import { AppCreateUserMutation } from "./__generated__/AppCreateUserMutation.graphql";
+
+import "react-native-gesture-handler";
+import "./helpers/loadIcons";
 
 const linking: LinkingOptions = {
   prefixes: [],
@@ -55,7 +55,7 @@ const App: React.FC = () => {
     `
   );
   useEffect(() => {
-    tryCreateUser({ variables: { input: { user: {} } } }).catch((e) => {});
+    tryCreateUser({ variables: { input: { user: {} } } }).catch((_) => {});
   }, [environment]);
 
   return (
@@ -83,14 +83,12 @@ const App: React.FC = () => {
   );
 };
 
-const AppWithProvider: React.FC = () => {
-  return (
-    <FirebaseProvider>
-      <RelayProvider>
-        <App />
-      </RelayProvider>
-    </FirebaseProvider>
-  );
-};
+const AppWithProvider: React.FC = () => (
+  <FirebaseProvider>
+    <RelayProvider>
+      <App />
+    </RelayProvider>
+  </FirebaseProvider>
+);
 
 export default AppWithProvider;

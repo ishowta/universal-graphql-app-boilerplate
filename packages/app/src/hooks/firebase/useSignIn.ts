@@ -1,7 +1,7 @@
-import { useFirebaseApp } from "../../providers/firebaseProvider";
 import firebase from "firebase/app";
-import "firebase/auth";
 import { useCallback } from "react";
+import { useFirebaseApp } from "../../providers/firebaseProvider";
+import "firebase/auth";
 
 // TODO: Append several providerTags of auth
 export const AuthProviderTagList = ["Google"] as const;
@@ -16,7 +16,6 @@ export const useSignIn = () => {
         case "Google": {
           const provider = new firebase.auth.GoogleAuthProvider();
           await app?.auth().signInWithPopup(provider);
-          return;
         }
       }
     },

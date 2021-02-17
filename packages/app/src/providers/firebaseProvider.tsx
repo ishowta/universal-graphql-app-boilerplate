@@ -1,7 +1,6 @@
-import React from "react";
+import React, { createContext, useContext, useMemo } from "react";
 import firebase from "firebase/app";
 import "firebase/auth";
-import { createContext, useContext, useMemo } from "react";
 
 const config: Parameters<typeof firebase.initializeApp>[0] = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,

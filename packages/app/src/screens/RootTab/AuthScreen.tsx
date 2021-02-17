@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { FlatList, ListRenderItem } from "react-native";
-import { SocialIcon, Text } from "react-native-elements";
+import { SocialIcon } from "react-native-elements";
 import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
 import { RootTabList } from "../../App";
-import { useCallback } from "react";
+
 import {
   AuthProviderTag,
   AuthProviderTagList,

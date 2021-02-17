@@ -2,7 +2,7 @@
  * @format
  */
 
-import "react-native";
+import "react-native-web";
 import React from "react";
 import renderer from "react-test-renderer";
 import App from "@app/app/src/App";

@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
-import { useFirebaseApp } from "../../providers/firebaseProvider.native";
 import { ReactNativeFirebase } from "@react-native-firebase/app";
 import { useAuthState } from "./useAuthState.native";
 
 export const useToken = () => {
-  const app = useFirebaseApp();
-  const [authState, _] = useAuthState();
+  const [authState] = useAuthState();
   const [
     error,
     setError,

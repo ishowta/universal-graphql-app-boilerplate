@@ -1,6 +1,6 @@
 import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
 import React from "react";
-import { Button, Text, View, _Text } from "react-native";
+import { Button, Text, View } from "react-native";
 import { graphql } from "react-relay";
 import { useQuery } from "relay-hooks";
 import { tailwind } from "../../tailwind";
@@ -8,17 +8,16 @@ import { UsersScreenQuery } from "./__generated__/UsersScreenQuery.graphql";
 import { useAuthState } from "../../hooks/firebase/useAuthState";
 import { RootTabList } from "../../App";
 
-import firebase from "firebase/app";
 import "firebase/auth";
 
 export type UserScreenParams = undefined;
 export type UserScreenProps = BottomTabScreenProps<RootTabList, "UsersScreen">;
 
 export const UsersScreen = ({ navigation }: UserScreenProps) => {
-  const [user, isAuthLoading, authError] = useAuthState();
+  const [user, _isAuthLoading, authError] = useAuthState();
   const {
     data,
-    isLoading: isDbLoading,
+    isLoading: _isDbLoading,
     error: dbError,
   } = useQuery<UsersScreenQuery>(
     graphql`

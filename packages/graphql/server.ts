@@ -1,11 +1,11 @@
+import createFastify from "fastify";
+import middie from "middie";
+import cors from "fastify-cors";
+import { postgraphile } from "./postgraphile";
+
 require("dotenv-flow").config({
   path: "../../",
 });
-
-import createFastify from "fastify";
-import middie from "middie";
-import { postgraphile } from "./postgraphile";
-import cors from "fastify-cors";
 
 (async () => {
   const fastify = createFastify({
@@ -37,4 +37,5 @@ import cors from "fastify-cors";
     }
     fastify.log.info(`server listening on ${address}`);
   });
+  // eslint-disable-next-line no-console
 })().catch((e) => console.error(e));
