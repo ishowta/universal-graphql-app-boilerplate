@@ -1,6 +1,6 @@
 import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
 import React from "react";
-import { Button, Text, View } from "react-native";
+import { Text, View } from "react-native";
 import { graphql } from "react-relay";
 import { useQuery } from "relay-hooks";
 import { tailwind } from "../../tailwind";
@@ -11,9 +11,9 @@ import { RootTabList } from "../../App";
 import "firebase/auth";
 
 export type UserScreenParams = undefined;
-export type UserScreenProps = BottomTabScreenProps<RootTabList, "UsersScreen">;
+export type UserScreenProps = BottomTabScreenProps<RootTabList, "Profile">;
 
-export const UsersScreen = ({ navigation }: UserScreenProps) => {
+export const UsersScreen = (_: UserScreenProps) => {
   const [user, _isAuthLoading, authError] = useAuthState();
   const {
     data,
@@ -48,15 +48,11 @@ export const UsersScreen = ({ navigation }: UserScreenProps) => {
               <Text>Not login</Text>
             ) : (
               <>
-                <Text>Auth User ID: {user.uid}</Text>
-                <Text>Auth User Email: {user.email}</Text>
-                <Text>Auth User Name: {user.displayName}</Text>
+                <Text>Firebase User ID: {user.uid}</Text>
+                <Text>Firebase User Email: {user.email}</Text>
+                <Text>Firebase User Name: {user.displayName}</Text>
               </>
             )}
-            <Button
-              title="Test"
-              onPress={() => navigation.navigate("HomeScreen")}
-            />
           </>
         )}
       </View>

@@ -25,9 +25,9 @@ const linking: LinkingOptions = {
 };
 
 export type RootTabList = {
-  HomeScreen: HomeScreenParams;
-  UsersScreen: UserScreenParams;
-  AuthScreen: AuthScreenParams;
+  Home: HomeScreenParams;
+  Profile: UserScreenParams;
+  Auth: AuthScreenParams;
 };
 
 const RootTab = createBottomTabNavigator<RootTabList>();
@@ -62,20 +62,20 @@ const App: React.FC = () => {
     <>
       <SafeAreaView />
       <NavigationContainer linking={linking}>
-        <RootTab.Navigator initialRouteName="HomeScreen">
+        <RootTab.Navigator initialRouteName="Home">
           <RootTab.Screen
             options={{ tabBarVisible }}
-            name="UsersScreen"
-            component={UsersScreen}
-          />
-          <RootTab.Screen
-            options={{ tabBarVisible }}
-            name="HomeScreen"
+            name="Home"
             component={HomeScreen}
           />
           <RootTab.Screen
             options={{ tabBarVisible }}
-            name="AuthScreen"
+            name="Profile"
+            component={UsersScreen}
+          />
+          <RootTab.Screen
+            options={{ tabBarVisible }}
+            name="Auth"
             component={AuthScreen}
           />
         </RootTab.Navigator>
