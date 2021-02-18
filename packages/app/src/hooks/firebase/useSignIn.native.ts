@@ -11,7 +11,10 @@ export const useSignIn = () => {
   const app = useFirebaseApp();
   const signIn = useCallback(
     async (providerTag: AuthProviderTag): Promise<void> => {
-      if (app == null) throw new Error();
+      if (app == null)
+        throw new Error(
+          "Firebase failed to initialize with unknown error (`useFirebaseApp() == null`)"
+        );
       switch (providerTag) {
         case "Google": {
           GoogleSignin.configure();
@@ -25,5 +28,6 @@ export const useSignIn = () => {
     },
     [app]
   );
+
   return signIn;
 };

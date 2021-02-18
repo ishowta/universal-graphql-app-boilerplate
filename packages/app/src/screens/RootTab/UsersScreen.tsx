@@ -1,24 +1,24 @@
-import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
+import type { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
 import React from "react";
 import { Text, View } from "react-native";
 import { graphql } from "react-relay";
 import { useQuery } from "relay-hooks";
-import { tailwind } from "../../tailwind";
-import { UsersScreenQuery } from "./__generated__/UsersScreenQuery.graphql";
+import type { RootTabList } from "../../App";
 import { useAuthState } from "../../hooks/firebase/useAuthState";
-import { RootTabList } from "../../App";
+import { tailwind } from "../../tailwind";
+import type { UsersScreenQuery } from "./__generated__/UsersScreenQuery.graphql";
 
 import "firebase/auth";
 
-export type UserScreenParams = undefined;
+export type UserScreenParameters = undefined;
 export type UserScreenProps = BottomTabScreenProps<RootTabList, "Profile">;
 
 export const UsersScreen = (_: UserScreenProps) => {
   const [user, _isAuthLoading, authError] = useAuthState();
   const {
     data,
-    isLoading: _isDbLoading,
-    error: dbError,
+    isLoading: _isDatabaseLoading,
+    error: databaseError,
   } = useQuery<UsersScreenQuery>(
     graphql`
       query UsersScreenQuery($id: String!) {
@@ -32,11 +32,12 @@ export const UsersScreen = (_: UserScreenProps) => {
     { id: user?.uid ?? "" },
     { skip: user == null }
   );
+
   return (
     <View style={tailwind("flex-1 justify-center  items-center")}>
       <View>
-        {dbError != null ? (
-          <Text>{dbError.message}</Text>
+        {databaseError != null ? (
+          <Text>{databaseError.message}</Text>
         ) : authError != null ? (
           <Text>{authError.message}</Text>
         ) : (

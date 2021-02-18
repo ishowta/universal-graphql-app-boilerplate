@@ -1,46 +1,48 @@
 import "react-native-gesture-handler";
 import "./helpers/loadicons";
 
-import React, { useEffect } from "react";
-import { LinkingOptions, NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import type { LinkingOptions } from "@react-navigation/native";
+import { NavigationContainer } from "@react-navigation/native";
+import React, { useEffect } from "react";
 import { Platform, SafeAreaView } from "react-native";
 import { graphql, useMutation, useRelayEnvironment } from "relay-hooks";
-import { UsersScreen, UserScreenParams } from "./screens/RootTab/UsersScreen";
-import { HomeScreen, HomeScreenParams } from "./screens/RootTab/HomeScreen";
-import { AuthScreen, AuthScreenParams } from "./screens/RootTab/AuthScreen";
+import type { AppCreateUserMutation } from "./__generated__/AppCreateUserMutation.graphql";
+import { useMediaQuery } from "./hooks/useMediaQuery";
 import { FirebaseProvider } from "./providers/firebaseProvider";
 import { RelayProvider } from "./providers/relayProvider";
-import { AppCreateUserMutation } from "./__generated__/AppCreateUserMutation.graphql";
+import type { AuthScreenParameters } from "./screens/RootTab/AuthScreen";
+import { AuthScreen } from "./screens/RootTab/AuthScreen";
+import type { HomeScreenParameters } from "./screens/RootTab/HomeScreen";
+import { HomeScreen } from "./screens/RootTab/HomeScreen";
+import type { UserScreenParameters } from "./screens/RootTab/UsersScreen";
+import { UsersScreen } from "./screens/RootTab/UsersScreen";
 
 const linking: LinkingOptions = {
-  prefixes: [],
   config: {
     screens: {
-      UsersScreen: "users",
-      HomeScreen: "home",
       AuthScreen: "auth",
+      HomeScreen: "home",
+      UsersScreen: "users",
     },
   },
+  prefixes: [],
 };
 
 export type RootTabList = {
-  Home: HomeScreenParams;
-  Profile: UserScreenParams;
-  Auth: AuthScreenParams;
+  Home: HomeScreenParameters;
+  Profile: UserScreenParameters;
+  Auth: AuthScreenParameters;
 };
 
 const RootTab = createBottomTabNavigator<RootTabList>();
 
 const App: React.FC = () => {
+  const isMobileWidth = useMediaQuery("(max-width: 32rem)");
   const tabBarVisible =
     Platform.OS === "ios" ||
     Platform.OS === "android" ||
-    (Platform.OS === "web" &&
-      (() => {
-        const { useMediaQuery } = require("beautiful-react-hooks");
-        return useMediaQuery("(max-width: 32rem)");
-      })());
+    (Platform.OS === "web" && isMobileWidth);
 
   const environment = useRelayEnvironment();
   const [tryCreateUser] = useMutation<AppCreateUserMutation>(
@@ -55,8 +57,10 @@ const App: React.FC = () => {
     `
   );
   useEffect(() => {
-    tryCreateUser({ variables: { input: { user: {} } } }).catch((_) => {});
-  }, [environment]);
+    tryCreateUser({ variables: { input: { user: {} } } }).catch((_) => {
+      return null;
+    });
+  }, [environment, tryCreateUser]);
 
   return (
     <>
@@ -64,19 +68,19 @@ const App: React.FC = () => {
       <NavigationContainer linking={linking}>
         <RootTab.Navigator initialRouteName="Home">
           <RootTab.Screen
-            options={{ tabBarVisible }}
-            name="Home"
             component={HomeScreen}
+            name="Home"
+            options={{ tabBarVisible }}
           />
           <RootTab.Screen
-            options={{ tabBarVisible }}
-            name="Profile"
             component={UsersScreen}
+            name="Profile"
+            options={{ tabBarVisible }}
           />
           <RootTab.Screen
-            options={{ tabBarVisible }}
-            name="Auth"
             component={AuthScreen}
+            name="Auth"
+            options={{ tabBarVisible }}
           />
         </RootTab.Navigator>
       </NavigationContainer>
@@ -84,12 +88,14 @@ const App: React.FC = () => {
   );
 };
 
-const AppWithProvider: React.FC = () => (
-  <FirebaseProvider>
-    <RelayProvider>
-      <App />
-    </RelayProvider>
-  </FirebaseProvider>
-);
+const AppWithProvider: React.FC = () => {
+  return (
+    <FirebaseProvider>
+      <RelayProvider>
+        <App />
+      </RelayProvider>
+    </FirebaseProvider>
+  );
+};
 
 export default AppWithProvider;

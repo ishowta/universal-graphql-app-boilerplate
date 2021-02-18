@@ -1,6 +1,7 @@
 import firebase from "firebase/app";
 import { useCallback } from "react";
 import { useFirebaseApp } from "../../providers/firebaseProvider";
+
 import "firebase/auth";
 
 // TODO: Append several providerTags of auth
@@ -11,7 +12,10 @@ export const useSignIn = () => {
   const app = useFirebaseApp();
   const signIn = useCallback(
     async (providerTag: AuthProviderTag): Promise<void> => {
-      if (app == null) throw new Error();
+      if (app == null)
+        throw new Error(
+          "Firebase failed to initialize with unknown error (`useFirebaseApp() == null`)"
+        );
       switch (providerTag) {
         case "Google": {
           const provider = new firebase.auth.GoogleAuthProvider();
@@ -21,5 +25,6 @@ export const useSignIn = () => {
     },
     [app]
   );
+
   return signIn;
 };

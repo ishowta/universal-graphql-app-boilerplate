@@ -1,5 +1,5 @@
+import type { ReactNativeFirebase } from "@react-native-firebase/app";
 import { useEffect, useState } from "react";
-import { ReactNativeFirebase } from "@react-native-firebase/app";
 import { useAuthState } from "./useAuthState.native";
 
 export const useToken = () => {

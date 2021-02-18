@@ -51,6 +51,7 @@
     "babel-plugin-relay": "^10.1.3",
     "graphql": "^15.0.0",
     "react-app-rewired": "^2.1.8",
-    "react-test-renderer": "~16.13.0"
+    "react-test-renderer": "~16.13.0",
+    "webpack": "^5.22.0"
   }
 }

@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign */
 // TODO: Refactor this file
 
 const fs = require("fs");
@@ -6,7 +5,9 @@ const path = require("path");
 const webpack = require("webpack");
 
 const appDirectory = fs.realpathSync(process.cwd());
-const resolveApp = (relativePath) => path.resolve(appDirectory, relativePath);
+const resolveApp = (relativePath) => {
+  return path.resolve(appDirectory, relativePath);
+};
 
 // our packages that will now be included in the CRA build step
 const appIncludes = [
@@ -15,11 +16,13 @@ const appIncludes = [
   resolveApp("../../../node_modules"),
 ];
 
-module.exports = function override(config, env) {
+module.exports = function override(config, environment) {
+  /* eslint-disable no-param-reassign */
+
   // allow importing from outside of src folder
-  config.resolve.plugins = config.resolve.plugins.filter(
-    (plugin) => plugin.constructor.name !== "ModuleScopePlugin"
-  );
+  config.resolve.plugins = config.resolve.plugins.filter((plugin) => {
+    return plugin.constructor.name !== "ModuleScopePlugin";
+  });
 
   config.module.rules[0].include = appIncludes;
   config.module.rules[1].oneOf[2].include = appIncludes;
@@ -33,8 +36,9 @@ module.exports = function override(config, env) {
     require.resolve("babel-plugin-relay")
   );
   config.plugins.push(
-    new webpack.DefinePlugin({ __DEV__: env !== "production" })
+    new webpack.DefinePlugin({ __DEV__: environment !== "production" })
   );
 
   return config;
+  /* eslint-enable no-param-reassign */
 };

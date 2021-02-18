@@ -1,7 +1,8 @@
-import firebase from "firebase/app";
-import "firebase/auth";
+import type firebase from "firebase/app";
 import { useEffect, useState } from "react";
 import { useAuthState } from "./useAuthState";
+
+import "firebase/auth";
 
 export const useToken = () => {
   const [authState, _, authStateError] = useAuthState();

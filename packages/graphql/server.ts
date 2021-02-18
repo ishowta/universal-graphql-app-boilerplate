@@ -1,42 +1,45 @@
-import createFastify from "fastify";
-import middie from "middie";
-import cors from "fastify-cors";
-
 require("dotenv-flow").config({
   path: "../../",
 });
-// eslint-disable-next-line import/first
+
+import createFastify from "fastify";
+import cors from "fastify-cors";
+import middie from "middie";
 import { postgraphile } from "./postgraphile";
 
 (async () => {
   const fastify = createFastify({
-    logger: true,
     disableRequestLogging: true,
+    logger: true,
   });
 
   await fastify.register(cors, {
-    origin: (origin, cb) => {
+    origin: (origin, callback) => {
+      if (process.env.NODE_ENV == null) throw new Error("NODE_ENV not setted");
       if (
-        ["development", "test"].includes(process.env.NODE_ENV!) ||
+        ["development", "test"].includes(process.env.NODE_ENV) ||
         origin === process.env.APP_URL
       ) {
-        cb(null, true);
+        callback(null, true);
+
         return;
       }
-      cb(new Error("Not allowed"), false);
+      callback(new Error("Not allowed"), false);
     },
   });
 
   await fastify.register(middie);
 
-  fastify.use(postgraphile(fastify));
+  await fastify.use(postgraphile(fastify));
 
-  fastify.listen(5000, (err, address) => {
-    if (err) {
-      fastify.log.error(err.message);
-      process.exit(1);
+  fastify.listen(5_000, (error, address) => {
+    if (error) {
+      fastify.log.error(error.message);
+      throw new Error(error.message);
     }
     fastify.log.info(`server listening on ${address}`);
   });
+})().catch((error) => {
   // eslint-disable-next-line no-console
-})().catch((e) => console.error(e));
+  console.error(error);
+});

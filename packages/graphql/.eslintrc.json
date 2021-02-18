@@ -1,5 +1,11 @@
 {
   "parserOptions": {
     "project": "../../tsconfig.json"
+  },
+  "rules": {
+    "@typescript-eslint/no-require-imports": "off",
+    "@typescript-eslint/no-var-requires": "off",
+    "import/no-commonjs": "off",
+    "import/first": "off"
   }
 }

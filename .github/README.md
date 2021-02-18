@@ -40,5 +40,3 @@ GraphQL driven universal application boilerplate used PostgreSQL, PostGraphile, 
 - Add migration tool(migra?)
 - Add Tests(Jest, Cypass, Storybook, CI ...)
 - Add payment system(Stripe?)
-- Styling
-- Refactoring

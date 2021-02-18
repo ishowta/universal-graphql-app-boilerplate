@@ -1,17 +1,17 @@
 module.exports = {
-  presets: ["module:metro-react-native-babel-preset"],
   plugins: [
     "relay",
     [
       "module:react-native-dotenv",
       {
+        allowUndefined: false,
+        blacklist: null,
         moduleName: "@env",
         path: ".env",
-        blacklist: null,
-        whitelist: null,
         safe: true,
-        allowUndefined: false,
+        whitelist: null,
       },
     ],
   ],
+  presets: ["module:metro-react-native-babel-preset"],
 };
