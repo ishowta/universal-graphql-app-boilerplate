@@ -1,7 +1,7 @@
 import firebase, { ReactNativeFirebase } from "@react-native-firebase/app";
 import React, { createContext, useContext } from "react";
 
-// ? No config needed here.
+// ? Firebase config provided by native tools
 
 const FirebaseContext = createContext<ReactNativeFirebase.FirebaseApp | null>(
   null

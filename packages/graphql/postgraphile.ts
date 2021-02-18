@@ -7,10 +7,13 @@ const IS_PROD = process.env.NODE_ENV === "production";
 const IS_DEV = process.env.NODE_ENV === "development";
 const _IS_TEST = process.env.NODE_ENV === "test";
 
+if (!process.env.FIREBASE_CREDENTIALS_PATH) {
+  throw new Error("`process.env.FIREBASE_CREDENTIALS_PATH` was not setted!");
+}
 admin.initializeApp({
   credential: admin.credential.cert(
     // eslint-disable-next-line import/no-dynamic-require
-    require(process.env.FIREBASE_CREDENTIALS_PATH!)
+    require(process.env.FIREBASE_CREDENTIALS_PATH)
   ),
 });
 
@@ -45,11 +48,29 @@ export const postgraphile = (fastify: FastifyInstance) =>
         }
         try {
           const token = await admin.auth().verifyIdToken(rawToken);
-          // TODO: Expand nested claims
-          const prefixedToken = record(
-            Object.entries(token)
+          const recordToPrefixedStrings = (
+            rec: Record<string, unknown>,
+            prefix: string
+          ): [string, string][] => [
+            ...(Object.entries(rec)
               .filter(([_, value]) => typeof value === "string")
-              .map(([key, value]) => [`jwt.claims.${key}`, value])
+              .map(([key, value]) => [`${prefix}.${key}`, value]) as [
+              string,
+              string
+            ][]),
+            ...Object.entries(rec)
+              .filter(
+                ([_, value]) => value != null && typeof value === "object"
+              )
+              .flatMap(([key, value]) =>
+                recordToPrefixedStrings(
+                  value as Record<string, unknown>,
+                  `${prefix}.${key}`
+                )
+              ),
+          ];
+          const prefixedToken = record(
+            recordToPrefixedStrings(token, "jwt.claims")
           );
           prefixedToken["jwt.claims.role"] = "authenticated_user";
           return prefixedToken;

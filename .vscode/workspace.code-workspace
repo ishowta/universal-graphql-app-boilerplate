@@ -70,7 +70,8 @@
       "gruntfuggly.todo-tree",
       "tamj0rd2.ts-quickfixes-extension",
       "q.typescript-mono-repo-import-helper",
-      "gamunu.vscode-yarn"
+      "gamunu.vscode-yarn",
+      "bradlc.vscode-tailwindcss"
     ]
   }
 }

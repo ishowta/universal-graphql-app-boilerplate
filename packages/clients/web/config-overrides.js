@@ -1,4 +1,5 @@
 /* eslint-disable no-param-reassign */
+// TODO: Refactor this file
 
 const fs = require("fs");
 const path = require("path");
@@ -34,13 +35,6 @@ module.exports = function override(config, env) {
   config.plugins.push(
     new webpack.DefinePlugin({ __DEV__: env !== "production" })
   );
-
-  // Load react-native-vector-icons
-  config.module.rules.push({
-    test: /\.ttf$/,
-    loader: "file-loader",
-    include: path.resolve(__dirname, "./static/media/[name].[ext]"),
-  });
 
   return config;
 };

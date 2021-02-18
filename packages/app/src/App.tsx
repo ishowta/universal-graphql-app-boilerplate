@@ -1,7 +1,10 @@
+import "react-native-gesture-handler";
+import "./helpers/loadicons";
+
 import React, { useEffect } from "react";
 import { LinkingOptions, NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Platform } from "react-native";
+import { Platform, SafeAreaView } from "react-native";
 import { graphql, useMutation, useRelayEnvironment } from "relay-hooks";
 import { UsersScreen, UserScreenParams } from "./screens/RootTab/UsersScreen";
 import { HomeScreen, HomeScreenParams } from "./screens/RootTab/HomeScreen";
@@ -9,9 +12,6 @@ import { AuthScreen, AuthScreenParams } from "./screens/RootTab/AuthScreen";
 import { FirebaseProvider } from "./providers/firebaseProvider";
 import { RelayProvider } from "./providers/relayProvider";
 import { AppCreateUserMutation } from "./__generated__/AppCreateUserMutation.graphql";
-
-import "react-native-gesture-handler";
-import "./helpers/loadIcons";
 
 const linking: LinkingOptions = {
   prefixes: [],
@@ -60,6 +60,7 @@ const App: React.FC = () => {
 
   return (
     <>
+      <SafeAreaView />
       <NavigationContainer linking={linking}>
         <RootTab.Navigator initialRouteName="HomeScreen">
           <RootTab.Screen

@@ -6,7 +6,7 @@
     "postinstall": "cd ios && pod install",
     "android": "react-native run-android",
     "ios": "react-native run-ios",
-    "start": "cd ../../../ && yarn react-native start --reset-cache",
+    "start": "cd ../../../ && yarn react-native start --reset-cache --config ./packages/clients/mobile/metro.config.js",
     "test": "yarn test:watch --watchAll=false",
     "test:watch": "jest",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"

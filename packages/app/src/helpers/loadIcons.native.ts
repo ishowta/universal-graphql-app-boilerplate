@@ -1,3 +1,3 @@
-// ? No config needed here.
+// ? Icons provided by native tools
 
 export {};

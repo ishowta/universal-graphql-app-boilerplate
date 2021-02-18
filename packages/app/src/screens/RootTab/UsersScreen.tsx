@@ -33,29 +33,33 @@ export const UsersScreen = ({ navigation }: UserScreenProps) => {
     { skip: user == null }
   );
   return (
-    <View style={tailwind("flex-1 items-center justify-center")}>
-      {dbError != null ? (
-        <Text>{dbError.message}</Text>
-      ) : authError != null ? (
-        <Text>{authError.message}</Text>
-      ) : (
-        <>
-          <Text>DB User Name: {data?.user?.username}</Text>
-          {user == null ? (
-            <Text>Not login</Text>
-          ) : (
-            <>
-              <Text>Auth User ID: {user.uid}</Text>
-              <Text>Auth User Email: {user.email}</Text>
-              <Text>Auth User Name: {user.displayName}</Text>
-            </>
-          )}
-          <Button
-            title="Test"
-            onPress={() => navigation.navigate("HomeScreen")}
-          />
-        </>
-      )}
+    <View style={tailwind("flex-1 justify-center  items-center")}>
+      <View>
+        {dbError != null ? (
+          <Text>{dbError.message}</Text>
+        ) : authError != null ? (
+          <Text>{authError.message}</Text>
+        ) : (
+          <>
+            <Text style={tailwind("text-blue-500")}>
+              DB User Name: {data?.user?.username}
+            </Text>
+            {user == null ? (
+              <Text>Not login</Text>
+            ) : (
+              <>
+                <Text>Auth User ID: {user.uid}</Text>
+                <Text>Auth User Email: {user.email}</Text>
+                <Text>Auth User Name: {user.displayName}</Text>
+              </>
+            )}
+            <Button
+              title="Test"
+              onPress={() => navigation.navigate("HomeScreen")}
+            />
+          </>
+        )}
+      </View>
     </View>
   );
 };

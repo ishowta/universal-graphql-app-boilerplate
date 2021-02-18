@@ -1,6 +1,6 @@
 # Universal GraphQL App Boilerplate (experimental)
 
-GraphQL driven universal application boilerplate used React, React Native, PostgreSQL, PostGraphile, Relay and tailwindcss
+GraphQL driven universal application boilerplate used PostgreSQL, PostGraphile, Relay , React and React Native
 
 :warning: **This app will probably work, but it's still experimental and can't be used in production.**
 
