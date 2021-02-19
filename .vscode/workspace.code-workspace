@@ -43,13 +43,13 @@
     "tailwindCSS.experimental.classRegex": [
       "tailwind\\(\"([^\"]*)",
       "tailwind\\(\\'([^\\']*)"
-    ]
+    ],
+    "npm.packageManager": "yarn"
   },
   "extensions": {
     // See https://go.microsoft.com/fwlink/?LinkId=827846
     // for the documentation about the extensions.json format
     "recommendations": [
-      "nucllear.vscode-extension-auto-import",
       "formulahendry.auto-rename-tag",
       "aaron-bond.better-comments",
       "msjsdiag.debugger-for-chrome",
