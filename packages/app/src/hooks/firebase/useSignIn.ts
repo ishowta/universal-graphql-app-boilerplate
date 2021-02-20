@@ -8,10 +8,12 @@ import "firebase/auth";
 export const AuthProviderTagList = ["Google"] as const;
 export type AuthProviderTag = typeof AuthProviderTagList[number];
 
-export const useSignIn = () => {
+export const useSignIn = (): ((
+  providerTag: AuthProviderTag
+) => Promise<firebase.auth.UserCredential>) => {
   const app = useFirebaseApp();
   const signIn = useCallback(
-    async (providerTag: AuthProviderTag): Promise<void> => {
+    async (providerTag: AuthProviderTag) => {
       if (app == null)
         throw new Error(
           "Firebase failed to initialize with unknown error (`useFirebaseApp() == null`)"
@@ -19,7 +21,8 @@ export const useSignIn = () => {
       switch (providerTag) {
         case "Google": {
           const provider = new firebase.auth.GoogleAuthProvider();
-          await app?.auth().signInWithPopup(provider);
+
+          return app.auth().signInWithPopup(provider);
         }
       }
     },

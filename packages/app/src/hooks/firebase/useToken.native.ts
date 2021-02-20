@@ -2,7 +2,11 @@ import type { ReactNativeFirebase } from "@react-native-firebase/app";
 import { useEffect, useState } from "react";
 import { useAuthState } from "./useAuthState.native";
 
-export const useToken = () => {
+export const useToken = (): [
+  string | null,
+  boolean,
+  ReactNativeFirebase.NativeFirebaseError | null
+] => {
   const [authState] = useAuthState();
   const [
     error,
@@ -13,5 +17,5 @@ export const useToken = () => {
     authState?.getIdToken().then(setToken).catch(setError);
   }, [authState]);
 
-  return [token, token == null, error] as const;
+  return [token, token == null, error];
 };

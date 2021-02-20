@@ -15,7 +15,7 @@ const config: Parameters<typeof firebase.initializeApp>[0] = {
 
 const FirebaseContext = createContext<firebase.app.App | null>(null);
 
-export const useFirebaseApp = () => {
+export const useFirebaseApp = (): firebase.app.App | null => {
   return useContext(FirebaseContext);
 };
 

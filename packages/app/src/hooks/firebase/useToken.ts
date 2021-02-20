@@ -4,8 +4,13 @@ import { useAuthState } from "./useAuthState";
 
 import "firebase/auth";
 
-export const useToken = () => {
-  const [authState, _, authStateError] = useAuthState();
+export const useToken = (): [
+  string | null,
+  boolean,
+  firebase.auth.Error | null
+] => {
+  const [authState, isAuthStateLoading, authStateError] = useAuthState();
+
   const [
     getTokenError,
     setGetTokenError,
@@ -15,5 +20,9 @@ export const useToken = () => {
     authState?.getIdToken().then(setToken).catch(setGetTokenError);
   }, [authState]);
 
-  return [token, token == null, authStateError ?? getTokenError] as const;
+  return [
+    token,
+    isAuthStateLoading || token == null,
+    authStateError ?? getTokenError,
+  ];
 };

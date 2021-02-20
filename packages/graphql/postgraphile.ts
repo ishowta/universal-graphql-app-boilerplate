@@ -5,18 +5,20 @@ import { postgraphile as createPostgraphile } from "postgraphile";
 
 const IS_PROD = process.env.NODE_ENV === "production";
 const IS_DEV = process.env.NODE_ENV === "development";
-const _IS_TEST = process.env.NODE_ENV === "test";
+// const IS_TEST = process.env.NODE_ENV === "test";
 
-if (!process.env.FIREBASE_CREDENTIALS_PATH) {
+if (process.env.FIREBASE_CREDENTIALS_PATH == null) {
   throw new Error("`process.env.FIREBASE_CREDENTIALS_PATH` was not setted!");
 }
 admin.initializeApp({
   credential: admin.credential.cert(
-    require(process.env.FIREBASE_CREDENTIALS_PATH)
+    require(process.env.FIREBASE_CREDENTIALS_PATH!)
   ),
 });
 
-export const postgraphile = (fastify: FastifyInstance) => {
+export const postgraphile = (
+  fastify: FastifyInstance
+): ReturnType<typeof createPostgraphile> => {
   return createPostgraphile(process.env.DATABASE_URL, ["app_public"], {
     allowExplain: !IS_PROD,
     appendPlugins: [require("@graphile-contrib/pg-simplify-inflector")],
@@ -34,7 +36,9 @@ export const postgraphile = (fastify: FastifyInstance) => {
     legacyRelations: "omit",
 
     pgSettings: async (request) => {
-      const generateJWTClaims = async () => {
+      const generateJWTClaims = async (): Promise<
+        Record<string, string | null>
+      > => {
         // ? https://www.graphile.org/postgraphile/postgresql-schema-design/#json-web-tokens
         const rawToken = request.headers.authorization?.split("Bearer ")[1];
         if (rawToken == null) {

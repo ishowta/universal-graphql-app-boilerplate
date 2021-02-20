@@ -8,7 +8,7 @@ import { useSignIn } from "../../hooks/firebase/useSignIn";
 
 export type AuthScreenParameters = undefined;
 export type AuthScreenProps = BottomTabScreenProps<RootTabList, "Auth">;
-export const AuthScreen = ({ navigation }: AuthScreenProps) => {
+export const AuthScreen: React.FC<AuthScreenProps> = ({ navigation }) => {
   const signIn = useSignIn();
   const onPressAuth = useCallback(
     async (providerTag) => {
@@ -28,7 +28,7 @@ export const AuthScreen = ({ navigation }: AuthScreenProps) => {
     >
       <SocialIcon
         button
-        onPress={() => {
+        onPress={async (): Promise<void> => {
           return onPressAuth("google");
         }}
         title="Sign in with Google"

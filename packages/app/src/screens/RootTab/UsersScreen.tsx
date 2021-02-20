@@ -13,11 +13,11 @@ import "firebase/auth";
 export type UserScreenParameters = undefined;
 export type UserScreenProps = BottomTabScreenProps<RootTabList, "Profile">;
 
-export const UsersScreen = (_: UserScreenProps) => {
-  const [user, _isAuthLoading, authError] = useAuthState();
+export const UsersScreen: React.FC<UserScreenProps> = () => {
+  const [user, isAuthLoading, authError] = useAuthState();
   const {
-    data,
-    isLoading: _isDatabaseLoading,
+    data: userData,
+    isLoading: isDatabaseLoading,
     error: databaseError,
   } = useQuery<UsersScreenQuery>(
     graphql`
@@ -36,26 +36,32 @@ export const UsersScreen = (_: UserScreenProps) => {
   return (
     <View style={tailwind("flex-1 justify-center  items-center")}>
       <View>
-        {databaseError != null ? (
-          <Text>{databaseError.message}</Text>
-        ) : authError != null ? (
-          <Text>{authError.message}</Text>
-        ) : (
-          <>
+        {databaseError != null && <Text>{databaseError.message}</Text>}
+        {authError != null && <Text>{authError.message}</Text>}
+        <>
+          {isDatabaseLoading ? (
+            <Text>DB Loading...</Text>
+          ) : (
             <Text style={tailwind("text-blue-500")}>
-              DB User Name: {data?.user?.username}
+              {`DB User Name: ${userData!.user!.username}`}
             </Text>
-            {user == null ? (
-              <Text>Not login</Text>
-            ) : (
-              <>
-                <Text>Firebase User ID: {user.uid}</Text>
-                <Text>Firebase User Email: {user.email}</Text>
-                <Text>Firebase User Name: {user.displayName}</Text>
-              </>
-            )}
-          </>
-        )}
+          )}
+          {isAuthLoading ? (
+            <Text>DB Loading...</Text>
+          ) : user == null ? (
+            <Text>Not login</Text>
+          ) : (
+            <>
+              <Text>{`Firebase User ID: ${user.uid}`}</Text>
+              {user.email != null && (
+                <Text>{`Firebase User Email: ${user.email}`}</Text>
+              )}
+              {user.displayName != null && (
+                <Text>{`Firebase User Name: ${user.displayName}`}</Text>
+              )}
+            </>
+          )}
+        </>
       </View>
     </View>
   );

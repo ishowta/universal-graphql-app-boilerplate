@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
 require("dotenv-flow").config({
   path: "../../",
 });
@@ -7,7 +8,7 @@ import cors from "fastify-cors";
 import middie from "middie";
 import { postgraphile } from "./postgraphile";
 
-(async () => {
+(async (): Promise<void> => {
   const fastify = createFastify({
     disableRequestLogging: true,
     logger: true,
@@ -33,13 +34,13 @@ import { postgraphile } from "./postgraphile";
   await fastify.use(postgraphile(fastify));
 
   fastify.listen(5_000, (error, address) => {
-    if (error) {
+    // TODO: what
+    if ((error as Error | null) == null) {
       fastify.log.error(error.message);
       throw new Error(error.message);
     }
     fastify.log.info(`server listening on ${address}`);
   });
-})().catch((error) => {
-  // eslint-disable-next-line no-console
-  console.error(error);
+})().catch(() => {
+  return undefined;
 });

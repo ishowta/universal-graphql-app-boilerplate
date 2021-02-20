@@ -57,45 +57,37 @@ const App: React.FC = () => {
     `
   );
   useEffect(() => {
-    tryCreateUser({ variables: { input: { user: {} } } }).catch((_) => {
+    tryCreateUser({ variables: { input: { user: {} } } }).catch(() => {
       return null;
     });
   }, [environment, tryCreateUser]);
 
   return (
-    <>
-      <SafeAreaView />
-      <NavigationContainer linking={linking}>
-        <RootTab.Navigator initialRouteName="Home">
-          <RootTab.Screen
-            component={HomeScreen}
-            name="Home"
-            options={{ tabBarVisible }}
-          />
-          <RootTab.Screen
-            component={UsersScreen}
-            name="Profile"
-            options={{ tabBarVisible }}
-          />
-          <RootTab.Screen
-            component={AuthScreen}
-            name="Auth"
-            options={{ tabBarVisible }}
-          />
-        </RootTab.Navigator>
-      </NavigationContainer>
-    </>
-  );
-};
-
-const AppWithProvider: React.FC = () => {
-  return (
     <FirebaseProvider>
       <RelayProvider>
-        <App />
+        <SafeAreaView />
+        <NavigationContainer linking={linking}>
+          <RootTab.Navigator initialRouteName="Home">
+            <RootTab.Screen
+              component={HomeScreen}
+              name="Home"
+              options={{ tabBarVisible }}
+            />
+            <RootTab.Screen
+              component={UsersScreen}
+              name="Profile"
+              options={{ tabBarVisible }}
+            />
+            <RootTab.Screen
+              component={AuthScreen}
+              name="Auth"
+              options={{ tabBarVisible }}
+            />
+          </RootTab.Navigator>
+        </NavigationContainer>
       </RelayProvider>
     </FirebaseProvider>
   );
 };
 
-export default AppWithProvider;
+export default App;

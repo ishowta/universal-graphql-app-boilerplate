@@ -7,11 +7,11 @@
   "plugins": [],
   "extends": [
     "canonical",
-    "canonical/cypress",
     "canonical/jest",
     "canonical/node",
     "canonical/react",
     "canonical/typescript",
+    "@ts-strict/eslint-config",
     "prettier",
     "prettier/babel",
     "prettier/prettier",
@@ -32,55 +32,60 @@
     "browser": true
   },
   "rules": {
-    // Extra rules
-    "react-hooks/exhaustive-deps": "error",
-    "no-param-reassign": ["error", { "props": true }],
-    // Typescript
-    "react/prop-types": "off",
-    "import/no-unresolved": "off",
-    "node/no-unpublished-import": "off",
-    // Universal app need process.env
+    /* TODO: turn to enable and fix */
     "node/no-process-env": "off",
-    // I get an error even with await/catch
-    "promise/prefer-await-to-callbacks": "off",
-    // Webpack css-loader and some libraries need it
     "import/no-unassigned-import": "off",
-    // useEffect can't return async so often use `then()`
+    "@typescript-eslint/no-non-null-assertion": "off", // Replace by suspence
+
+    /* Duplicate */
+    // with import/no-extraneous-dependencies
+    "node/no-extraneous-import": "off",
+
+    /* These possibly false positives, but are probably bugs that the type system cannot detect. */
+    "react-hooks/exhaustive-deps": "warn",
+    "no-param-reassign": ["warn", { "props": true }],
+
+    /* prevent false positive */
+    "@typescript-eslint/no-magic-numbers": "off",
+
+    /* These complications are necessary for expressiveness */
+    "@typescript-eslint/no-type-alias": "off",
+
+    /* Not needed for */
+    // typescript
+    "react/prop-types": "off",
+    "react/forbid-component-props": "off",
+    "no-eq-null": "off",
+    "eqeqeq": ["error", "always", { "null": "never" }],
+    "consistent-return": "off",
+    "@typescript-eslint/no-unused-vars": [
+      // Ignore `_`
+      "error",
+      {
+        "varsIgnorePattern": "^_$",
+        "argsIgnorePattern": "^_$"
+      }
+    ],
+    // private package
+    "node/no-unpublished-import": "off",
+    // Application
     "promise/prefer-await-to-then": "off",
-    // Can't use `as` at default import and needed
-    "import/no-named-as-default": "off",
-    // HOC
-    "filenames/match-exported": "off",
-    // Does not correspond to `_`
-    "@typescript-eslint/no-shadow": "off",
+    "promise/prefer-await-to-callbacks": "off",
+    // CSS Loader
+    //"import/no-unassigned-import": ["error", { "allow": ["**/*.css"] }],
+
+    /* Styling conventions */
+    "@typescript-eslint/quotes": "off",
     // Allow ^_.*$
     "id-match": [
       "error",
       "(^[A-Za-z]+(?:[A-Z][a-z]*)*\\d*$)|(^[A-Z]+(_[A-Z]+)*(_\\d$)*$)|(^(_|\\$).*$)"
     ],
-    // React native
-    "react/forbid-component-props": "off",
-    // Bug in monorepo (https://github.com/benmosher/eslint-plugin-import/pull/1696)
-    "import/no-extraneous-dependencies": "off",
-    "node/no-extraneous-import": "off",
-    // The order is more important
-    "no-negated-condition": "off",
     // Allow *.config.*, *.native.*, ...
     "filenames/match-regex": [
       "error",
       "^[A-Z]?[a-z]+(?:[A-Z][a-z]+)*(\\.[a-z]+)*$",
       false
-    ],
-    // No need to distinguish
-    "no-eq-null": "off",
-    "eqeqeq": ["error", "always", { "null": "never" }],
-    // Ignore ^_ for develop
-    "@typescript-eslint/no-unused-vars": [
-      "error",
-      {
-        "varsIgnorePattern": "^_",
-        "argsIgnorePattern": "^_"
-      }
     ],
     // Custom naming convention
     "@typescript-eslint/naming-convention": [
@@ -123,7 +128,7 @@
     ]
   },
   "overrides": [
-    // Types
+    // For type definitions
     {
       "files": ["**.d.ts"],
       "rules": {
@@ -131,24 +136,32 @@
         "import/unambiguous": "off"
       }
     },
-    // Config file
+    // For config files (js)
+    // TODO: ignore all typescript rules
     {
       "files": ["**.js"],
       "rules": {
         "import/unambiguous": "off",
         "import/no-commonjs": "off",
+        "filenames/match-regex": "off",
+        "node/no-unpublished-require": "off",
+        "filenames/match-exported": "off",
         "@typescript-eslint/no-var-requires": "off",
         "@typescript-eslint/no-require-imports": "off",
-        "filenames/match-regex": "off",
-        "node/no-unpublished-require": "off"
+        "@typescript-eslint/explicit-function-return-type": "off",
+        "@typescript-eslint/no-unsafe-assignment": "off",
+        "@typescript-eslint/no-unsafe-member-access": "off",
+        "@typescript-eslint/no-unsafe-call": "off",
+        "@typescript-eslint/require-await": "off"
       }
     },
-    // Relay's `*.graphql.ts`
+    // For auto generated graphql type definitions (from relay)
     {
       "files": ["**.graphql.ts"],
       "rules": {
         "eslint-comments/no-unlimited-disable": "off",
-        "unicorn/no-abusive-eslint-disable": "off"
+        "unicorn/no-abusive-eslint-disable": "off",
+        "@typescript-eslint/ban-tslint-comment": "off"
       }
     }
   ]

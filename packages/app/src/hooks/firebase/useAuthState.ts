@@ -4,19 +4,23 @@ import { useFirebaseApp } from "../../providers/firebaseProvider";
 
 import "firebase/auth";
 
-export const useAuthState = () => {
+export const useAuthState = (): [
+  firebase.User | null,
+  boolean,
+  firebase.auth.Error | null
+] => {
   const app = useFirebaseApp();
   const [authState, setAuthState] = useState(app?.auth().currentUser);
   const [error, setError] = useState<firebase.auth.Error | null>(null);
   useEffect(() => {
     const unSubscribe = app?.auth().onAuthStateChanged(setAuthState, setError);
     if (unSubscribe)
-      return () => {
+      return (): void => {
         unSubscribe();
       };
 
     return undefined;
   }, [app]);
 
-  return [authState, authState == null, error] as const;
+  return [authState ?? null, authState == null, error];
 };

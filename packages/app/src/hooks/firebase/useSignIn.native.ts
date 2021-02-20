@@ -1,4 +1,5 @@
 import { GoogleSignin } from "@react-native-community/google-signin";
+import type { FirebaseAuthTypes } from "@react-native-firebase/auth";
 import firebaseAuth from "@react-native-firebase/auth";
 import { useCallback } from "react";
 import { useFirebaseApp } from "../../providers/firebaseProvider.native";
@@ -7,10 +8,12 @@ import { useFirebaseApp } from "../../providers/firebaseProvider.native";
 export const AuthProviderTagList = ["Google"] as const;
 export type AuthProviderTag = typeof AuthProviderTagList[number];
 
-export const useSignIn = () => {
+export const useSignIn = (): ((
+  providerTag: AuthProviderTag
+) => Promise<FirebaseAuthTypes.UserCredential>) => {
   const app = useFirebaseApp();
   const signIn = useCallback(
-    async (providerTag: AuthProviderTag): Promise<void> => {
+    async (providerTag: AuthProviderTag) => {
       if (app == null)
         throw new Error(
           "Firebase failed to initialize with unknown error (`useFirebaseApp() == null`)"
@@ -22,7 +25,8 @@ export const useSignIn = () => {
           const googleCredential = firebaseAuth.GoogleAuthProvider.credential(
             idToken
           );
-          await app?.auth().signInWithCredential(googleCredential);
+
+          return app.auth().signInWithCredential(googleCredential);
         }
       }
     },

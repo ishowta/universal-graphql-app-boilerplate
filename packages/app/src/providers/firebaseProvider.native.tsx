@@ -8,7 +8,7 @@ const FirebaseContext = createContext<ReactNativeFirebase.FirebaseApp | null>(
   null
 );
 
-export const useFirebaseApp = () => {
+export const useFirebaseApp = (): ReactNativeFirebase.FirebaseApp | null => {
   return useContext(FirebaseContext);
 };
 

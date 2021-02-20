@@ -9,24 +9,24 @@ export const RelayProvider: React.FC = ({ children }) => {
   const [token] = useToken();
 
   const fetchQuery = useCallback<FetchFunction>(
-    (operation, variables) => {
+    async (operation, variables) => {
       if (environment.REACT_APP_GRAPHQL_SERVER_URL == null) {
         throw new Error("environment REACT_APP_GRAPHQL_SERVER_URL not found");
       }
 
-      return fetch(environment.REACT_APP_GRAPHQL_SERVER_URL, {
+      const response = await fetch(environment.REACT_APP_GRAPHQL_SERVER_URL, {
         body: JSON.stringify({
           query: operation.text,
           variables,
         }),
         headers: {
-          authorization: token ? `Bearer ${token}` : "",
+          authorization: token == null ? "" : `Bearer ${token}`,
           "Content-Type": "application/json",
         },
         method: "POST",
-      }).then((response) => {
-        return response.json();
       });
+
+      return response.json();
     },
     [token]
   );

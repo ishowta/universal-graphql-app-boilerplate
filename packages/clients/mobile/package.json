@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "postinstall": "cd ios && pod install",
+    "install": "cd ios && pod install",
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "start": "cd ../../../ && yarn react-native start --reset-cache --config ./packages/clients/mobile/metro.config.js",

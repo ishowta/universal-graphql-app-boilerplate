@@ -21,10 +21,6 @@
       "path": "../packages/db"
     },
     {
-      "name": "🩺 @app/e2e",
-      "path": "../packages/e2e"
-    },
-    {
       "name": "🔗 @app/graphql",
       "path": "../packages/graphql"
     },
@@ -51,6 +47,7 @@
     // for the documentation about the extensions.json format
     "recommendations": [
       "formulahendry.auto-rename-tag",
+      "steoates.autoimport",
       "aaron-bond.better-comments",
       "msjsdiag.debugger-for-chrome",
       "mikestead.dotenv",
