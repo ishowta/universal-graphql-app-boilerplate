@@ -35,7 +35,7 @@ import { postgraphile } from "./postgraphile";
 
   fastify.listen(5_000, (error, address) => {
     // TODO: what
-    if ((error as Error | null) == null) {
+    if ((error as Error | null) != null) {
       fastify.log.error(error.message);
       throw new Error(error.message);
     }

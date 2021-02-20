@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo } from "react";
-import { RelayEnvironmentProvider } from "relay-hooks";
+import { RelayEnvironmentProvider } from "react-relay/hooks";
 import type { FetchFunction } from "relay-runtime";
 import { Environment, Network, RecordSource, Store } from "relay-runtime";
 import { environment } from "../helpers/environment";

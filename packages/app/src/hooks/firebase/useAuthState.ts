@@ -6,7 +6,6 @@ import "firebase/auth";
 
 export const useAuthState = (): [
   firebase.User | null,
-  boolean,
   firebase.auth.Error | null
 ] => {
   const app = useFirebaseApp();
@@ -22,5 +21,5 @@ export const useAuthState = (): [
     return undefined;
   }, [app]);
 
-  return [authState ?? null, authState == null, error];
+  return [authState ?? null, error];
 };

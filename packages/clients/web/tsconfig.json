@@ -1,8 +1,12 @@
 {
   "extends": "../../../tsconfig.base.json",
-  "include": ["__tests__", "public", "src"],
+  "include": [
+    "__tests__",
+    "public",
+    "src"
+  ],
   "compilerOptions": {
     "noFallthroughCasesInSwitch": true,
-    "jsx": "react"
+    "jsx": "react-jsx"
   }
 }

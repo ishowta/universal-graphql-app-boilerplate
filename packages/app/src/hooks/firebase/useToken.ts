@@ -9,7 +9,7 @@ export const useToken = (): [
   boolean,
   firebase.auth.Error | null
 ] => {
-  const [authState, isAuthStateLoading, authStateError] = useAuthState();
+  const [authState, authStateError] = useAuthState();
 
   const [
     getTokenError,
@@ -20,9 +20,5 @@ export const useToken = (): [
     authState?.getIdToken().then(setToken).catch(setGetTokenError);
   }, [authState]);
 
-  return [
-    token,
-    isAuthStateLoading || token == null,
-    authStateError ?? getTokenError,
-  ];
+  return [token, token == null, authStateError ?? getTokenError];
 };

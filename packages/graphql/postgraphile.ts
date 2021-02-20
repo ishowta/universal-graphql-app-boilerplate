@@ -12,7 +12,7 @@ if (process.env.FIREBASE_CREDENTIALS_PATH == null) {
 }
 admin.initializeApp({
   credential: admin.credential.cert(
-    require(process.env.FIREBASE_CREDENTIALS_PATH!)
+    require(process.env.FIREBASE_CREDENTIALS_PATH)
   ),
 });
 

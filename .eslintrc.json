@@ -4,7 +4,7 @@
   "parserOptions": {
     "project": "./tsconfig.json"
   },
-  "plugins": [],
+  "plugins": ["relay"],
   "extends": [
     "canonical",
     "canonical/jest",
@@ -12,6 +12,7 @@
     "canonical/react",
     "canonical/typescript",
     "@ts-strict/eslint-config",
+    "plugin:relay/strict",
     "prettier",
     "prettier/babel",
     "prettier/prettier",
@@ -35,7 +36,6 @@
     /* TODO: turn to enable and fix */
     "node/no-process-env": "off",
     "import/no-unassigned-import": "off",
-    "@typescript-eslint/no-non-null-assertion": "off", // Replace by suspence
 
     /* Duplicate */
     // with import/no-extraneous-dependencies
@@ -66,6 +66,7 @@
         "argsIgnorePattern": "^_$"
       }
     ],
+    "relay/generated-flow-types": "off",
     // private package
     "node/no-unpublished-import": "off",
     // Application
