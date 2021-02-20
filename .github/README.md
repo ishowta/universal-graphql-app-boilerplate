@@ -35,7 +35,6 @@ GraphQL driven universal application boilerplate used PostgreSQL, PostGraphile, 
 
 ## Todo
 
-- Use react suspense
 - Setup android build
 - Setup production build and deploy
 - Add migration tool(migra?)
