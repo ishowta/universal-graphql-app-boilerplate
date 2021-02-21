@@ -23,8 +23,8 @@
     "firebase": "^8.2.7",
     "postcss": "^8.1.13",
     "prop-types": "^15.7.2",
-    "react": "^0.0.0-experimental-8af27aeed",
-    "react-dom": "^0.0.0-experimental-8af27aeed",
+    "react": "~16.13.1",
+    "react-dom": "~16.13.1",
     "react-native": "0.63.4",
     "react-native-elements": "^3.2.0",
     "react-native-gesture-handler": "^1.10.0",
@@ -39,7 +39,7 @@
     "tailwindcss": "^2.0.3"
   },
   "devDependencies": {
-    "@types/react": "^17.0.0",
+    "@types/react": "~16.14.0",
     "@types/react-native": "0.63.4",
     "@types/react-native-vector-icons": "^6.4.6",
     "@types/react-relay": "^7.0.17",
