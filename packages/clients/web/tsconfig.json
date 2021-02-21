@@ -7,6 +7,6 @@
   ],
   "compilerOptions": {
     "noFallthroughCasesInSwitch": true,
-    "jsx": "react-jsx"
+    "jsx": "react"
   }
 }

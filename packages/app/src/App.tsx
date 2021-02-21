@@ -5,8 +5,8 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import type { LinkingOptions } from "@react-navigation/native";
 import { NavigationContainer } from "@react-navigation/native";
 import React, { Suspense, useEffect } from "react";
-import { Platform, SafeAreaView } from "react-native";
-import { graphql, useMutation, useRelayEnvironment } from "react-relay/hooks";
+import { ActivityIndicator, Platform, SafeAreaView, View } from "react-native";
+import { graphql, useMutation, useRelayEnvironment } from "relay-hooks";
 import type { AppCreateUserMutation } from "./__generated__/AppCreateUserMutation.graphql";
 import { useMediaQuery } from "./hooks/useMediaQuery";
 import { FirebaseProvider } from "./providers/firebaseProvider";
@@ -17,6 +17,7 @@ import type { HomeScreenParameters } from "./screens/RootTab/HomeScreen";
 import { HomeScreen } from "./screens/RootTab/HomeScreen";
 import type { UserScreenParameters } from "./screens/RootTab/UsersScreen";
 import { UsersScreen } from "./screens/RootTab/UsersScreen";
+import { tailwind } from "./tailwind";
 
 const linking: LinkingOptions = {
   config: {
@@ -57,7 +58,9 @@ const AppRoot: React.FC = () => {
     `
   );
   useEffect(() => {
-    tryCreateUser({ variables: { input: { user: {} } } });
+    tryCreateUser({ variables: { input: { user: {} } } }).catch(() => {
+      return null;
+    });
   }, [environment, tryCreateUser]);
 
   return (
@@ -90,9 +93,11 @@ const App: React.FC = () => {
   return (
     <FirebaseProvider>
       <RelayProvider>
-        <Suspense fallback="Loading...">
-          <AppRoot />
-        </Suspense>
+        <View style={tailwind("flex-1 flex justify-center")}>
+          <Suspense fallback={<ActivityIndicator />}>
+            <AppRoot />
+          </Suspense>
+        </View>
       </RelayProvider>
     </FirebaseProvider>
   );

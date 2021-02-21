@@ -2,7 +2,7 @@ import type { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
 import React from "react";
 import { Text, View } from "react-native";
 import { graphql } from "react-relay";
-import { useLazyLoadQuery } from "react-relay/hooks";
+import { useLazyLoadQuery } from "relay-hooks";
 import type { RootTabList } from "../../App";
 import { useAuthState } from "../../hooks/firebase/useAuthState";
 import { tailwind } from "../../tailwind";
@@ -15,7 +15,7 @@ export type UserScreenProps = BottomTabScreenProps<RootTabList, "Profile">;
 
 export const UsersScreen: React.FC<UserScreenProps> = () => {
   const [user, authError] = useAuthState();
-  const data = useLazyLoadQuery<UsersScreenQuery>(
+  const { data } = useLazyLoadQuery<UsersScreenQuery>(
     graphql`
       query UsersScreenQuery($id: String!) {
         user(id: $id) {
@@ -23,7 +23,8 @@ export const UsersScreen: React.FC<UserScreenProps> = () => {
         }
       }
     `,
-    { id: user?.uid ?? "" }
+    user?.uid == null ? undefined : { id: user.uid },
+    { skip: user == null }
   );
 
   return (
@@ -31,11 +32,14 @@ export const UsersScreen: React.FC<UserScreenProps> = () => {
       <View>
         {authError != null && <Text>{authError.message}</Text>}
         <>
-          {data.user == null ? (
+          {data == null ? (
             <Text>DB Not Login</Text>
           ) : (
             <Text style={tailwind("text-blue-500")}>
-              {`DB User Name: ${data.user.username}`}
+              {
+                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                `DB User Name: ${data.user!.username}`
+              }
             </Text>
           )}
           {user == null ? (
