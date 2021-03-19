@@ -30,6 +30,8 @@ GraphQL driven universal application boilerplate used PostgreSQL, PostGraphile, 
 ## Usage
 
 1. Create `/.env.local` and fill it.
+1. Create postgres user (e.g. `createuser --createdb --createrole --pwprompt postgraphile`)
+1. Create DB (e.g. `createdb test1 --encoding=utf8 --locale=en_US.utf8 --template=template0 --owner=postgraphile`)
 1. Setup firebase. See https://firebase.google.com/docs/web/setup and https://rnfirebase.io/auth/usage.
 1. As needed: `yarn install`, `yarn setup`, `yarn start`
 

@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "postinstall": "touch schema.graphql",
     "start": "yarn cross-env NODE_ENV=development nodemon"
   },
   "dependencies": {

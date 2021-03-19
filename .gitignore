@@ -1,5 +1,5 @@
-# Private folder
-private/
+# Secure file (but I recommend move secure file out of project)
+service-account-file.json
 
 # Yarn
 .yarn/*
