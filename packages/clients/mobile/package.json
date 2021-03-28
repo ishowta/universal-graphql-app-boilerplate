@@ -3,10 +3,10 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "install": "cd ios && pod install",
+    "postinstall": "command -v pod && cd ios && pod install || exit 0",
     "android": "react-native run-android",
     "ios": "react-native run-ios",
-    "start": "cd ../../../ && yarn react-native start --reset-cache --config ./packages/clients/mobile/metro.config.js",
+    "start": "yarn react-native start --reset-cache --config ./metro.config.js",
     "test": "yarn test:watch --watchAll=false",
     "test:watch": "jest",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"

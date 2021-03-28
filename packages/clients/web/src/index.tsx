@@ -1,13 +1,12 @@
 import App from "@app/app/src/App";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { AppRegistry } from "react-native";
-import { name as appName } from "../../../../app.json";
 import reportWebVitals from "./reportWebVitals";
 
-AppRegistry.registerComponent(appName, () => {
+AppRegistry.registerComponent('App', () => {
   return App;
 });
-AppRegistry.runApplication(appName, {
+AppRegistry.runApplication('App', {
   rootTag: document.querySelector("#root"),
 });
 

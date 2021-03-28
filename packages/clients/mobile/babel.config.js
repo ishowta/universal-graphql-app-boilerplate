@@ -7,7 +7,7 @@ module.exports = {
         allowUndefined: false,
         blacklist: null,
         moduleName: "@env",
-        path: ".env",
+        path: "../../../.env",
         safe: true,
         whitelist: null,
       },

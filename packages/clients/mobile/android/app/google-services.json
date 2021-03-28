@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "230539311897",
+    "project_id": "nicoreader-b36b0",
+    "storage_bucket": "nicoreader-b36b0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:230539311897:android:e491ae58ddfcf767726388",
+        "android_client_info": {
+          "package_name": "com.mobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "230539311897-7re2tavit834p638kmivdd2okmc9uub3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDhbeeXGS3dw1z7k7cyM0BRktr438kDAWQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "230539311897-7re2tavit834p638kmivdd2okmc9uub3.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "230539311897-qsmod1qcppiffabqtpov6rqph6fbenoj.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "love.iwata.app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
