@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "setup": "basename ../../../.env* | xargs -I{} ln -s ../../../{} {} >&/dev/null ;exit 0",
+    "setup": "bash -c \"find ../../../ -maxdepth 1 -name '.env*' | xargs -I{} basename {} | xargs -I{} ln -s ../../../{} {}\" || exit 0",
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "yarn test:watch --watchAll=false",
