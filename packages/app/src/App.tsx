@@ -1,5 +1,5 @@
 import "react-native-gesture-handler";
-import "./helpers/loadicons";
+import "./helpers/loadIcons";
 
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import type { LinkingOptions } from "@react-navigation/native";
