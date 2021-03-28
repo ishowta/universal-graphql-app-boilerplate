@@ -36,7 +36,6 @@ GraphQL driven universal application boilerplate used PostgreSQL, PostGraphile, 
 ## Todo
 
 - Add real world sample
-- Setup android build
 - Setup production build and deploy
 - Add migration tool(migra?)
 - Add Tests(Jest, Cypass, Storybook, CI ...)
