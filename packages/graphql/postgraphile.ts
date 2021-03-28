@@ -94,11 +94,13 @@ export const postgraphile = (
       };
     },
 
+    retryOnInitFail: true,
+
     setofFunctionsContainNulls: false,
 
     showErrorStack: IS_PROD ? undefined : "json",
-
     subscriptions: true,
-    watchPg: IS_DEV,
+
+    watchPg: IS_DEV
   });
 };

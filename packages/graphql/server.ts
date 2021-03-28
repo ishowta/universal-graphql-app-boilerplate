@@ -33,13 +33,12 @@ import { postgraphile } from "./postgraphile";
 
   await fastify.use(postgraphile(fastify));
 
-  fastify.listen(5_000, (error, address) => {
+  fastify.listen(5_000, (error, _) => {
     // TODO: what
     if ((error as Error | null) != null) {
       fastify.log.error(error.message);
       throw new Error(error.message);
     }
-    fastify.log.info(`server listening on ${address}`);
   });
 })().catch(() => {
   return undefined;
