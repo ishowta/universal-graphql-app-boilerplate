@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "setup": ". ../../scripts/loadenv.sh && psql -U postgraphile -d $DATABASE_NAME -f ./setup.pgsql && psql -U postgraphile -d $DATABASE_NAME -f ./schema.pgsql && psql -U postgraphile -d $DATABASE_NAME -f ./controllers/*.pgsql && psql -U postgraphile -d $DATABASE_NAME -f ./seeds.pgsql",
+    "setup": "rm -rf ./data && docker-compose build",
+    "start": "docker-compose up",
     "reset": "yarn setup"
   }
 }

@@ -1,0 +1,11 @@
+﻿version: '3'
+services:
+  postgres:
+    build: .
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: trust
+    volumes:
+      - .:/docker-entrypoint-initdb.d
+      - ./data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432

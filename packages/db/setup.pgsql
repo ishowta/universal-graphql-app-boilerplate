@@ -1,12 +1,6 @@
 /*
 Most of this setup based on graphile-starter (https://github.com/graphile/starter/blob/main/%40app/db/migrations/committed/000001.sql)
  */
--- Clear
-DROP owned BY postgraphile CASCADE;
-
-DROP owned BY anonymous CASCADE;
-
-DROP owned BY authenticated_user CASCADE;
 
 -- Setup logger
 SET client_min_messages TO WARNING;
@@ -15,17 +9,14 @@ SET client_min_messages TO WARNING;
 CREATE EXTENSION IF NOT EXISTS pgcrypto;
 
 -- Setup role
-DROP ROLE IF EXISTS anonymous;
 
 CREATE ROLE anonymous;
 
-DROP ROLE IF EXISTS authenticated_user;
-
 CREATE ROLE authenticated_user;
 
-GRANT anonymous TO postgraphile;
+GRANT anonymous TO postgres;
 
-GRANT authenticated_user TO postgraphile;
+GRANT authenticated_user TO postgres;
 
 -- Setup schema used by app
 CREATE SCHEMA app_public;
@@ -41,7 +32,7 @@ ALTER DEFAULT privileges REVOKE ALL ON sequences FROM public;
 
 ALTER DEFAULT privileges REVOKE ALL ON functions FROM public;
 
-GRANT ALL ON SCHEMA public TO postgraphile;
+GRANT ALL ON SCHEMA public TO postgres;
 
 GRANT usage ON SCHEMA public, app_public, app_hidden TO authenticated_user;
 
